@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  links = [
+    { path: '/', name: "Home" },
+    { path: '/about', name: "About" },
+    { path: '/cart', name: "Cart" },
+    { path: '/signin', name: "Signin" },
+
+  ]
 
 }

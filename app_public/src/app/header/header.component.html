@@ -1,1 +1,7 @@
-<p>header works!</p>
+<header>
+    <ul>
+        <li *ngFor="let link of links">
+            <a mat-button [routerLink]="link.path">{{link.name}}</a>
+        </li>
+    </ul>
+</header>

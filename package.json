@@ -7,6 +7,9 @@
     "dev": "nodemon ./bin/www"
   },
   "dependencies": {
+    "@angular/animations": "^17.3.3",
+    "@angular/cdk": "^17.3.3",
+    "@angular/material": "^17.3.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
