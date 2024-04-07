@@ -83,16 +83,15 @@ export default class ApiCtrl {
 
 
     addToCart = (req: Request, res: Response, next: NextFunction) => {
-        const { userId } = req.params;
-        const { itemId } = req.body;
+        const { user, item } = req.body; // Assuming the user and item IDs are provided in the request body
 
-        User.findById(userId)
+        User.findById(user) // Assuming the user ID is provided in the request body
             .then((user) => {
                 if (!user) {
                     res.status(404).json({ message: 'User not found' });
                     return;
                 }
-                return CartItem.create({ user: userId, item: itemId });
+                return CartItem.create({ user: user._id, item }); // Assuming item is already a valid ObjectId
             })
             .then(() => {
                 res.status(200).json({ message: 'Item added to cart successfully' });
@@ -101,6 +100,7 @@ export default class ApiCtrl {
                 res.status(400).json({ error: error.message });
             });
     }
+
 
     deleteCartItem = (req: Request, res: Response, next: NextFunction): void => {
         const { id } = req.params;
