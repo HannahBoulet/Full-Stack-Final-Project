@@ -1,30 +1,19 @@
-import { Schema, Document, model } from "mongoose"
+import { Schema, Document, model, Types } from "mongoose"
 
-import { IUser } from "./user.models";
-import { IItem } from "./items.models";
 export interface ICart extends Document {
 
-    itemName: IItem['itemName'],
-    userName: IUser['userName'],
-    price: IItem['price']
+    _id: Types.ObjectId,
+    user: Types.ObjectId,
+    item: Types.ObjectId,
+    quantity: Number,
+    _v: String
 }
 
 const cartSchema: Schema = new Schema({
-    itemName: {
-        type: Schema.Types.ObjectId, ref: 'ItemName',
-        required: true
-    },
-    userName:
-    {
-        type: Schema.Types.ObjectId, ref: 'UserName',
-        required: true
-    },
-    price:
-    {
-        type: Schema.Types.ObjectId, ref: 'ItemPrice',
-        required: true
-    },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    item: { type: Schema.Types.ObjectId, ref: 'Item' },
+    quantity: { type: Number, default: 1 }
 
 })
 
-export default model<ICart>('Item', cartSchema);
+export default model<ICart>('Cart', cartSchema);

@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public', 'dist', 'app_public', 'browser')));
 
-//app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 app.get('*', (req: Request, res: Response, next: NextFunction) => {
   if (req.path !== '/api') {

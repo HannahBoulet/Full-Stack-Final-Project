@@ -1,14 +1,20 @@
-import { Schema, Document, model } from "mongoose"
+import { Schema, Document, model, Types } from "mongoose"
 
 export interface IItem extends Document {
-
+    _id: Types.ObjectId,
     itemName: String,
+    image: String,
     description: String,
-    price: Number
+    price: Number,
+    _v: String
 }
 
 const itemsSchema: Schema = new Schema({
     itemName: {
+        type: String,
+        required: true
+    },
+    image: {
         type: String,
         required: true
     },

@@ -1,17 +1,15 @@
-import { Schema, Document, model } from "mongoose"
+import { Schema, Document, model, Types } from "mongoose"
 
 export interface IUser extends Document {
-
-    firstlastname: String,
+    _id: Types.ObjectId,
     userName: String,
-    password: String
+    password: String,
+    shoppingCart: Types.ObjectId[],
+    _v: String
 }
 
 const userSchema: Schema = new Schema({
-    firstlastname: {
-        type: String,
-        required: true
-    },
+
     userName:
     {
         type: String,
@@ -22,6 +20,7 @@ const userSchema: Schema = new Schema({
         type: String,
         required: true
     },
+    shoppingCart: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
 
 })
 
