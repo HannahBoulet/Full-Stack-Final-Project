@@ -1,5 +1,5 @@
 header {
-    background-color: rgba(232, 229, 234, 0.635);
+    background-color: rgba(139, 15, 222, 0.635);
 
 }
 
@@ -13,6 +13,19 @@ ul {
     padding: 0px;
 }
 
+
+
+.svg-icon {
+    width: 24px;
+    /* Adjust the width as needed */
+    height: 24px;
+    /* Adjust the height as needed */
+}
+
 li {
     margin: 1%;
+    flex-grow: 1;
+    /* This will make all items grow to fill the space equally */
+    text-align: center;
+    /* Centers the text within the li */
 }

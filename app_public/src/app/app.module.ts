@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ProfileComponent } from './profile/profile.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
     SigninComponent,
     MakeAccountComponent,
     HeaderComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatCardModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
