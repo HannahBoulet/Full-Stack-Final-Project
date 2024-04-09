@@ -4,6 +4,11 @@ import Item from '../models/items.models';
 import CartItem from '../models/cart.models';
 export default class ApiCtrl {
 
+    //need the ability to add to cart wo signing in so there wouldnt be a user ID, but the cart would not save. 
+    //need to add a update cart for if user deletes quantity, so if user either increases quanitty of a item or decreases
+    //update user logic 
+
+
 
     //item logic
     getAllItems = (req: Request, res: Response, next: NextFunction): void => {
@@ -81,7 +86,7 @@ export default class ApiCtrl {
             });
     }
 
-
+    //need to fix where if user adds same item it adds to quantity
     addToCart = (req: Request, res: Response, next: NextFunction) => {
         const { user, item } = req.body; // Assuming the user and item IDs are provided in the request body
 

@@ -23,9 +23,6 @@ router.route("/user/:userId/cart")
     .post(apiCtrl.addToCart)
     .get(apiCtrl.getCartItems);
 
-
-
-
 router.route('/user/:userId/cart/:id')
     .delete(apiCtrl.deleteCartItem);
 
