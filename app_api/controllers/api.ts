@@ -4,12 +4,6 @@ import Item from '../models/items.models';
 import CartItem from '../models/cart.models';
 export default class ApiCtrl {
 
-    //need the ability to add to cart wo signing in so there wouldnt be a user ID, but the cart would not save. 
-    //need to add a update cart for if user deletes quantity, so if user either increases quanitty of a item or decreases
-    //update user logic 
-
-
-
     //item logic
     getAllItems = (req: Request, res: Response, next: NextFunction): void => {
         Item.find()
@@ -120,6 +114,7 @@ export default class ApiCtrl {
     }
 
     //users
+    //update user logic  where user can change their password
     getAllUsers = (req: Request, res: Response, next: NextFunction): void => {
         User.find()
             .then((users) => {

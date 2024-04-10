@@ -3,6 +3,7 @@ header {
 
 }
 
+
 ul {
     list-style: none;
     display: flex;
@@ -11,21 +12,17 @@ ul {
     justify-content: center;
     margin: 0px;
     padding: 0px;
+
 }
-
-
 
 .svg-icon {
     width: 24px;
-    /* Adjust the width as needed */
     height: 24px;
-    /* Adjust the height as needed */
 }
+
 
 li {
     margin: 1%;
-    flex-grow: 1;
-    /* This will make all items grow to fill the space equally */
+    flex-grow: 0;
     text-align: center;
-    /* Centers the text within the li */
 }

@@ -1,7 +1,6 @@
 <header>
     <ul>
-        <li *ngFor="let link of links"
-            [ngClass]="{'right-icons': link.name === 'Cart' || link.name === 'Signin', 'center-icons': link.name !== 'Cart' && link.name !== 'Signin'}">
+        <li *ngFor="let link of links">
             <ng-container *ngIf="link.name === 'Cart'">
                 <a mat-button [routerLink]="link.path">
                     <img src="../../assets/shopping-cart-outline-svgrepo-com.svg" alt="Cart" class="svg-icon">
@@ -13,7 +12,7 @@
                 </a>
             </ng-container>
             <ng-container *ngIf="link.name !== 'Cart' && link.name !== 'Signin'">
-                <a mat-button [routerLink]="link.path">{{link.name}}</a>
+                <a mat-button style="color: black;" [routerLink]="link.path">{{link.name}}</a>
             </ng-container>
         </li>
     </ul>
