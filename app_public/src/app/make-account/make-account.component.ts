@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './make-account.component.css'
 })
 export class MakeAccountComponent {
-
+  //make account needs:
+  /* 
+post to make the user account
+  */
 }

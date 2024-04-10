@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './about.component.css'
 })
 export class AboutComponent {
-
+  //about needs nothin other then basic html description w some fancyness
 }
