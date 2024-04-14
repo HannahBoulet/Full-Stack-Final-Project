@@ -1,0 +1,33 @@
+.about-container {
+    background-image: url('../../assets/about.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 389px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-text {
+    text-align: center;
+    color: white;
+}
+
+.container {
+    display: flex;
+}
+
+.left {
+    flex: 1;
+    padding-left: 600px;
+}
+
+.right {
+    flex: 4;
+    padding-right: 1px;
+}
+
+.image-size {
+    width: 300px;
+    height: 300px;
+}

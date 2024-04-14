@@ -1,0 +1,44 @@
+welcome-container {
+    background-image: url('../../assets/homepage.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 389px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-text {
+    text-align: center;
+    color: white;
+}
+
+.item-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    display: inline-block;
+    width: 200px;
+    vertical-align: top;
+}
+
+.item-image {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+h4 {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+}

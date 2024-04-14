@@ -3,7 +3,7 @@ export default interface Items {
     itemName: String,
     image: String,
     description: String,
-    price: Number
+    price: number
     v: String
 }
 export interface IItems {
@@ -11,6 +11,6 @@ export interface IItems {
     itemName: String,
     image: String,
     description: String,
-    price: Number
+    price: number
     v: String
 }

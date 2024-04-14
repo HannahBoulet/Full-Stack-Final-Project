@@ -1,1 +1,23 @@
-<p>home works!</p>
+<div class="welcome-container">
+    <div class="welcome-text">
+        <h2>Welcome to Our Store!</h2>
+    </div>
+</div>
+<div>
+    <label for="sortDirection">Sort by:</label>
+    <select id="sortDirection" [(ngModel)]="sortDirection" (change)="onSortDirectionChange()">
+        <option value="asc">Lowest to Highest Price</option>
+        <option value="desc">Highest to Lowest Price</option>
+    </select>
+</div>
+
+<!-- Display sorted items -->
+<div *ngFor="let item of sortedItems" class="item-card">
+    <mat-card>
+        <mat-card-content [routerLink]="'items/' + item.itemName">
+            <img class="item-image" [src]="item.image" alt="{{item.itemName}}">
+            <h4>{{item.itemName}}</h4>
+            <h1>${{item.price}}</h1>
+        </mat-card-content>
+    </mat-card>
+</div>

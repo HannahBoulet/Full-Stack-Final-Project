@@ -15,14 +15,12 @@ export default class ApiCtrl {
             });
     }
     getItem = (req: Request, res: Response, next: NextFunction): void => {
-        const itemId = req.params.id;
-
-        Item.findById(itemId)
+        Item.findOne({ name: req.params["itemName"] })
             .then((item) => {
                 if (!item) {
                     res.status(404).json({
                         item: undefined,
-                        message: `Could not find item with id: ${itemId}`
+                        message: `Could not find item with name`
                     });
                 } else {
                     res.status(200).json({
@@ -81,6 +79,10 @@ export default class ApiCtrl {
     }
 
     //need to fix where if user adds same item it adds to quantity
+
+    // going to change this so it will add to the cart array in the user page, so instead of having a completely seperate model
+    //i will just have a array of the item IDs, where when user add to cart it will add there and then when user clicks on the cart button
+    //i will iterate through the list and get each of the items that way.
     addToCart = (req: Request, res: Response, next: NextFunction) => {
         const { user, item } = req.body; // Assuming the user and item IDs are provided in the request body
 
