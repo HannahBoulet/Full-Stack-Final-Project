@@ -14,13 +14,15 @@ export class HomeComponent {
   display all items, but only their price and name and img.
   see if user is logged in with current user, if not prompt them w a log in or register (may implement if time)
   */
+
   items: Items[] = [];
-  sortedItems: Items[] = []; // Array to hold sorted items
-  sortDirection: string = 'asc'; // Default sorting direction
+  sortedItems: Items[] = [];
+  sortDirection: string = 'asc';
   constructor(private shopService: ShopService, private router: Router) { }
   ngOnInit() {
     this.shopService.getItemListener().subscribe((items: Items[]) => {
       this.items = items;
+      this.sortItems();
     })
     this.shopService.getItems();
   }
@@ -33,8 +35,6 @@ export class HomeComponent {
       }
     });
   }
-
-  // Function to handle sorting direction change
   onSortDirectionChange() {
     this.sortItems();
   }

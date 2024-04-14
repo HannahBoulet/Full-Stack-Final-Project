@@ -17,7 +17,8 @@ router.route('/items')
 
 router.route('/items/:id')
     .get(apiCtrl.getItem)
-    .put(apiCtrl.updateItem);
+    .put(apiCtrl.updateItem)
+    .delete(apiCtrl.deleteItem);
 
 router.route("/user/:userId/cart")
     .post(apiCtrl.addToCart)

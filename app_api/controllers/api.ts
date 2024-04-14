@@ -66,6 +66,19 @@ export default class ApiCtrl {
 
 
     }
+    deleteItem = (req: Request, res: Response, next: NextFunction) => {
+        Item.findByIdAndDelete(req.params["id"])
+            .then(() => {
+                res.status(200).json({
+                    message: "Item deleted successfully"
+                })
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    message: "error retrieving Item: " + error
+                })
+            })
+    }
 
     //Cart
     getCartItems = (req: Request, res: Response, next: NextFunction) => {
