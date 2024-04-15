@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from '../models/user.models';
 import Item from '../models/items.models';
-import CartItem from '../models/cart.models';
 export default class ApiCtrl {
 
 
