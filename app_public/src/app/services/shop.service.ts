@@ -39,6 +39,7 @@ export class ShopService {
       this.itemListener.next(this.items);
     })
   }
+
   getItem(name: string) {
     this.http.get<{ item: IItems, message: string }>(this.API_URL + "items/" + name)
       .subscribe((res: { item: IItems | undefined, message: string }) => {
@@ -50,14 +51,14 @@ export class ShopService {
             description: res.item.description,
             price: res.item.price,
             v: res.item.v
-          }
-        }
-        else {
+          };
+        } else {
           this.currentItem = undefined;
         }
         this.currentItemListener.next(this.currentItem);
-      })
+      });
   }
+
 
   getCurrentItem(): Items | undefined {
     return this.currentItem

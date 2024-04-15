@@ -15,17 +15,19 @@ router.route('/items')
     .get(apiCtrl.getAllItems)
     .post(apiCtrl.addItem);
 
+router.route('/items/:itemName')
+    .get(apiCtrl.getItem);
+
 router.route('/items/:id')
-    .get(apiCtrl.getItem)
     .put(apiCtrl.updateItem)
     .delete(apiCtrl.deleteItem);
 
-router.route("/user/:userId/cart")
-    .post(apiCtrl.addToCart)
-    .get(apiCtrl.getCartItems);
+// router.route("/user/:userId/cart")
+//     .post(apiCtrl.addToCart)
+//     .get(apiCtrl.getCartItems);
 
-router.route('/user/:userId/cart/:id')
-    .delete(apiCtrl.deleteCartItem);
+// router.route('/user/:userId/cart/:id')
+//     .delete(apiCtrl.deleteCartItem);
 
 
 export default router;

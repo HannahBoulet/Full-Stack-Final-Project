@@ -15,22 +15,24 @@ export default class ApiCtrl {
             });
     }
     getItem = (req: Request, res: Response, next: NextFunction): void => {
-        Item.findOne({ name: req.params["itemName"] })
+        const itemName = req.params["itemName"];
+        console.log("Received item name:", itemName);
+        Item.findOne({ itemName: req.params["itemName"] })
             .then((item) => {
                 if (!item) {
                     res.status(404).json({
                         item: undefined,
-                        message: `Could not find item with name`
-                    });
+                        message: `Could not find item with name ${itemName}`
+                    })
                 } else {
                     res.status(200).json({
                         item,
                         message: 'Retrieved item'
-                    });
+                    })
                 }
             })
             .catch((error) => {
-                res.status(400).json({ message: `Error retrieving item: ${error.message}` });
+                res.status(400)
             });
     }
 
@@ -80,53 +82,60 @@ export default class ApiCtrl {
             })
     }
 
-    //Cart
-    getCartItems = (req: Request, res: Response, next: NextFunction) => {
-        CartItem.find({ user: req.params["userId"] }).populate('item')
-            .then((cartItems) => {
-                res.status(200).json(cartItems);
-            })
-            .catch((error) => {
-                res.status(400).json({ error: error.message });
-            });
-    }
-
-    //need to fix where if user adds same item it adds to quantity
-
-    // going to change this so it will add to the cart array in the user page, so instead of having a completely seperate model
-    //i will just have a array of the item IDs, where when user add to cart it will add there and then when user clicks on the cart button
-    //i will iterate through the list and get each of the items that way.
-    addToCart = (req: Request, res: Response, next: NextFunction) => {
-        const { user, item } = req.body; // Assuming the user and item IDs are provided in the request body
-
-        User.findById(user) // Assuming the user ID is provided in the request body
-            .then((user) => {
-                if (!user) {
-                    res.status(404).json({ message: 'User not found' });
-                    return;
-                }
-                return CartItem.create({ user: user._id, item }); // Assuming item is already a valid ObjectId
-            })
-            .then(() => {
-                res.status(200).json({ message: 'Item added to cart successfully' });
-            })
-            .catch((error) => {
-                res.status(400).json({ error: error.message });
-            });
-    }
+    // changing up cart logic, decided to add item id to the cart [] object 
+    // from user and then will interact thru to to display the items
+    // add api/user/userid/item/itemid
+    // delete api/user/userid/item/itemid
 
 
-    deleteCartItem = (req: Request, res: Response, next: NextFunction): void => {
-        const { id } = req.params;
 
-        CartItem.findByIdAndDelete(id)
-            .then(() => {
-                res.status(204).send();
-            })
-            .catch((error) => {
-                res.status(400).json({ message: `Error deleting cart item: ${error.message}` });
-            });
-    }
+    // //Cart
+    // getCartItems = (req: Request, res: Response, next: NextFunction) => {
+    //     CartItem.find({ user: req.params["userId"] }).populate('item')
+    //         .then((cartItems) => {
+    //             res.status(200).json(cartItems);
+    //         })
+    //         .catch((error) => {
+    //             res.status(400).json({ error: error.message });
+    //         });
+    // }
+
+    // //need to fix where if user adds same item it adds to quantity
+
+    // // going to change this so it will add to the cart array in the user page, so instead of having a completely seperate model
+    // //i will just have a array of the item IDs, where when user add to cart it will add there and then when user clicks on the cart button
+    // //i will iterate through the list and get each of the items that way.
+    // addToCart = (req: Request, res: Response, next: NextFunction) => {
+    //     const { user, item } = req.body; // Assuming the user and item IDs are provided in the request body
+
+    //     User.findById(user) // Assuming the user ID is provided in the request body
+    //         .then((user) => {
+    //             if (!user) {
+    //                 res.status(404).json({ message: 'User not found' });
+    //                 return;
+    //             }
+    //             return CartItem.create({ user: user._id, item }); // Assuming item is already a valid ObjectId
+    //         })
+    //         .then(() => {
+    //             res.status(200).json({ message: 'Item added to cart successfully' });
+    //         })
+    //         .catch((error) => {
+    //             res.status(400).json({ error: error.message });
+    //         });
+    // }
+
+
+    // deleteCartItem = (req: Request, res: Response, next: NextFunction): void => {
+    //     const { id } = req.params;
+
+    //     CartItem.findByIdAndDelete(id)
+    //         .then(() => {
+    //             res.status(204).send();
+    //         })
+    //         .catch((error) => {
+    //             res.status(400).json({ message: `Error deleting cart item: ${error.message}` });
+    //         });
+    // }
 
     //users
     //update user logic  where user can change their password
