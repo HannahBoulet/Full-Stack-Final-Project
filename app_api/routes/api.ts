@@ -22,12 +22,9 @@ router.route('/items/:id')
     .put(apiCtrl.updateItem)
     .delete(apiCtrl.deleteItem);
 
-// router.route("/user/:userId/cart")
-//     .post(apiCtrl.addToCart)
-//     .get(apiCtrl.getCartItems);
-
-// router.route('/user/:userId/cart/:id')
-//     .delete(apiCtrl.deleteCartItem);
+router.route('/user/:id/items/:itemId')
+    .post(apiCtrl.addItemToCart)
+    .delete(apiCtrl.deleteItemFromCart);
 
 
 export default router;

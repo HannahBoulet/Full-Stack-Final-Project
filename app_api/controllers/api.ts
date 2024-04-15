@@ -4,6 +4,7 @@ import Item from '../models/items.models';
 import CartItem from '../models/cart.models';
 export default class ApiCtrl {
 
+
     //item logic
     getAllItems = (req: Request, res: Response, next: NextFunction): void => {
         Item.find()
@@ -81,62 +82,41 @@ export default class ApiCtrl {
                 })
             })
     }
+    //cart logic
+    // Inside the addItemToCart method:
 
-    // changing up cart logic, decided to add item id to the cart [] object 
-    // from user and then will interact thru to to display the items
-    // add api/user/userid/item/itemid
-    // delete api/user/userid/item/itemid
+    addItemToCart = (req: Request, res: Response, next: NextFunction): void => {
+        const userId = req.params["id"];
+        const itemId = req.params["itemId"];
 
+        User.findByIdAndUpdate(userId, { $push: { shoppingCart: itemId } })
+            .then(() => {
+                res.status(200).json({
+                    message: "Item added to the cart successfully"
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    message: "Failed to add item to the cart: " + error
+                });
+            });
+    }
+    deleteItemFromCart = (req: Request, res: Response, next: NextFunction): void => {
+        const userId = req.params["id"];
+        const itemId = req.params["itemId"];
 
-
-    // //Cart
-    // getCartItems = (req: Request, res: Response, next: NextFunction) => {
-    //     CartItem.find({ user: req.params["userId"] }).populate('item')
-    //         .then((cartItems) => {
-    //             res.status(200).json(cartItems);
-    //         })
-    //         .catch((error) => {
-    //             res.status(400).json({ error: error.message });
-    //         });
-    // }
-
-    // //need to fix where if user adds same item it adds to quantity
-
-    // // going to change this so it will add to the cart array in the user page, so instead of having a completely seperate model
-    // //i will just have a array of the item IDs, where when user add to cart it will add there and then when user clicks on the cart button
-    // //i will iterate through the list and get each of the items that way.
-    // addToCart = (req: Request, res: Response, next: NextFunction) => {
-    //     const { user, item } = req.body; // Assuming the user and item IDs are provided in the request body
-
-    //     User.findById(user) // Assuming the user ID is provided in the request body
-    //         .then((user) => {
-    //             if (!user) {
-    //                 res.status(404).json({ message: 'User not found' });
-    //                 return;
-    //             }
-    //             return CartItem.create({ user: user._id, item }); // Assuming item is already a valid ObjectId
-    //         })
-    //         .then(() => {
-    //             res.status(200).json({ message: 'Item added to cart successfully' });
-    //         })
-    //         .catch((error) => {
-    //             res.status(400).json({ error: error.message });
-    //         });
-    // }
-
-
-    // deleteCartItem = (req: Request, res: Response, next: NextFunction): void => {
-    //     const { id } = req.params;
-
-    //     CartItem.findByIdAndDelete(id)
-    //         .then(() => {
-    //             res.status(204).send();
-    //         })
-    //         .catch((error) => {
-    //             res.status(400).json({ message: `Error deleting cart item: ${error.message}` });
-    //         });
-    // }
-
+        User.findByIdAndUpdate(userId, { $pull: { shoppingCart: itemId } })
+            .then(() => {
+                res.status(200).json({
+                    message: "Item removed from the cart successfully"
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    message: "Failed to remove item from the cart: " + error
+                });
+            });
+    }
     //users
     //update user logic  where user can change their password
     getAllUsers = (req: Request, res: Response, next: NextFunction): void => {
