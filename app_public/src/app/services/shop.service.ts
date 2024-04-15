@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import Items, { IItems } from '../models/items.model';
+import User, { IUser } from '../models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,8 +16,11 @@ export class ShopService {
   private currentItem: Items | undefined;
   private currentItemListener: Subject<Items | undefined> = new Subject();
 
-  //user stuff(maybe moved to a auth foldr)
-
+  //user stuff
+  private user: User[] = [];
+  private userListener: Subject<User[]> = new Subject();
+  private currentUser: User | undefined;
+  private currentUserListener: Subject<User | undefined> = new Subject();
   //cart stuff
 
 
@@ -69,6 +73,11 @@ export class ShopService {
   getItemListener(): Observable<Items[]> {
     return this.itemListener.asObservable();
   }
+
+
+
+
+
 
 
   //calls needed:

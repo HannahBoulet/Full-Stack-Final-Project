@@ -18,6 +18,9 @@ router.route('/items')
 router.route('/items/:itemName')
     .get(apiCtrl.getItem);
 
+router.route('/items/id/:id')
+    .get(apiCtrl.getItembyID);
+
 router.route('/items/:id')
     .put(apiCtrl.updateItem)
     .delete(apiCtrl.deleteItem);

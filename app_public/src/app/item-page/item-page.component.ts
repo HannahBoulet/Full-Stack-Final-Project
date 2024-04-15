@@ -22,4 +22,9 @@ export class ItemPageComponent implements OnInit {
     })
     this.shopService.getItem(this.route.snapshot.params["itemName"]);
   }
+  //add a way to add item to cart, add one where it will be a quick check out which will put customer directly to cart,
+  //or just simply add to cart and continue shopping
+
+
 }
+

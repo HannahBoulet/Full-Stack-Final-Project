@@ -15,19 +15,37 @@ export default class ApiCtrl {
             });
     }
     getItem = (req: Request, res: Response, next: NextFunction): void => {
-        const itemName = req.params["itemName"];
-        console.log("Received item name:", itemName);
         Item.findOne({ itemName: req.params["itemName"] })
             .then((item) => {
                 if (!item) {
                     res.status(404).json({
                         item: undefined,
-                        message: `Could not find item with name ${itemName}`
+                        message: `Could not find item with name `
                     })
                 } else {
                     res.status(200).json({
                         item,
                         message: 'Retrieved item'
+                    })
+                }
+            })
+            .catch((error) => {
+                res.status(400)
+            });
+    }
+
+    getItembyID = (req: Request, res: Response, next: NextFunction): void => {
+        Item.findById(req.params["id"])
+            .then((item) => {
+                if (!item) {
+                    res.status(404).json({
+                        item: undefined,
+                        message: `Could not find item with Id `
+                    })
+                } else {
+                    res.status(200).json({
+                        item,
+                        message: 'Retrieved item with that ID'
                     })
                 }
             })
