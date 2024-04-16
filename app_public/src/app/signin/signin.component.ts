@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ShopService } from '../services/shop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -6,8 +8,24 @@ import { Component } from '@angular/core';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent {
-  //signin account needs:
-  /* 
-    get to check email +password and then  use that for the current user id for all other parts of site.
-  */
+  username: string = '';
+  password: string = '';
+  error: string = '';
+
+  constructor(private shopService: ShopService, private router: Router) { }
+
+  signin(): void {
+    this.shopService.login(this.username, this.password).subscribe(response => {
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/profile']);
+      } else {
+        this.error = response.message;
+      }
+    }, error => {
+      console.error('Error during login:', error);
+      this.error = 'An unexpected error occurred. Please try again later.';
+    });
+  }
 }
+

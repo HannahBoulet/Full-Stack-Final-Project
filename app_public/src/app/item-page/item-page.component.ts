@@ -16,13 +16,11 @@ export class ItemPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private shopService: ShopService, private router: Router) { }
 
   ngOnInit() {
-    // Subscribe to route parameter changes
     this.route.params.subscribe(params => {
       const itemName = params['itemName'];
       this.shopService.getItem(itemName);
     });
 
-    // Subscribe to item and items observables
     this.shopService.getCurrentItemListener().subscribe((item: Items | undefined) => {
       if (!item) {
         this.router.navigate(['/']);

@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ShopService } from '../services/shop.service';
+import User from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent {
-  //profile needs:
-  /* 
-    use get with the current user id to display email and password then use put to update if user wants to.
-  */
+export class ProfileComponent implements OnInit {
+  user: User | undefined;
+
+  constructor(private shopService: ShopService, private router: Router) { }
+
+  ngOnInit(): void {
+
+  }
 }
+
+
