@@ -5,11 +5,17 @@ const router = express.Router();
 const apiCtrl = new ApiCtrl();
 
 router.route('/user')
-    .get(apiCtrl.getAllUsers)
+    .get(apiCtrl.getAllUsers);
+
+router.route('/signup')
     .post(apiCtrl.addUser);
+router.route('/login')
+    .post(apiCtrl.login);
+
 
 router.route("/user/:id")
-    .get(apiCtrl.getUserById);
+    .get(apiCtrl.getUserById)
+    .put(apiCtrl.updateUser);
 
 router.route('/items')
     .get(apiCtrl.getAllItems)

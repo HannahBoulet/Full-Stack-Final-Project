@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import User from '../models/user.models';
 import Item from '../models/items.models';
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
 export default class ApiCtrl {
 
 
@@ -148,8 +151,11 @@ export default class ApiCtrl {
     addUser = (req: Request, res: Response, next: NextFunction): void => {
         const { userName, password } = req.body;
 
-        const user = new User({ userName, password });
-        user.save()
+        bcrypt.hash(password, 10)
+            .then((hashedPassword) => {
+                const user = new User({ userName, password: hashedPassword });
+                return user.save();
+            })
             .then((user) => {
                 res.status(201).json(user);
             })
@@ -157,6 +163,7 @@ export default class ApiCtrl {
                 res.status(400).json(error);
             });
     }
+
 
     getUserById = (req: Request, res: Response, next: NextFunction) => {
         User.findById(req.params["id"])
@@ -179,6 +186,70 @@ export default class ApiCtrl {
                 })
             })
     }
+    updateUser = (req: Request, res: Response, next: NextFunction): void => {
+        const userId = req.params["id"];
+        const { userName, password } = req.body;
+        let hashedPassword;
+        if (password) {
+            bcrypt.hash(password, 10)
+                .then((hash) => {
+                    hashedPassword = hash;
+                    return User.findByIdAndUpdate(userId, { userName, password: hashedPassword });
+                })
+                .then(() => {
+                    res.status(200).json({
+                        message: "User updated successfully"
+                    });
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        message: "Failed to update user: " + error
+                    });
+                });
+        } else {
+            User.findByIdAndUpdate(userId, { userName })
+                .then(() => {
+                    res.status(200).json({
+                        message: "User updated successfully"
+                    });
+                })
+                .catch((error) => {
+                    res.status(400).json({
+                        message: "Failed to update user: " + error
+                    });
+                });
+        }
+    }
+    login = (req: Request, res: Response, next: NextFunction): void => {
+        const { userName, password } = req.body;
+        User.findOne({ userName })
+            .then((user) => {
+                if (!user) {
+                    return res.status(401).json({ message: "login failed" });
+                }
+                bcrypt.compare(password, user.password)
+                    .then((isMatch) => {
+                        if (!isMatch) {
+                            return res.status(401).json({ message: "login failed" });
+                        }
+                        const token = jwt.sign(
+                            { userId: user._id, userName: user.userName },
+                            "your_secret_key",
+                            { expiresIn: "1h" }
+                        );
+
+                        res.status(200).json({ message: "login successful", token });
+                    })
+                    .catch((error) => {
+
+                        res.status(500).json({ message: "Internal server error" });
+                    });
+            })
+            .catch((error) => {
+                res.status(500).json({ message: "Internal server error" });
+            });
+    }
+
 
 
 }
