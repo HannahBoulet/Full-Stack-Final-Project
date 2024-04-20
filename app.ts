@@ -3,10 +3,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-
+import passport from 'passport';
 import apiRouter from './app_api/routes/api';
 
 require('./app_api/models/db');
+require('./app_api/config/passport');
+
 
 const app = express();
 
@@ -20,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public', 'dist', 'app_public', 'browser')));
-
+app.use(passport.initialize());
 app.use('/api', apiRouter);
 
 app.get('*', (req: Request, res: Response, next: NextFunction) => {

@@ -18,7 +18,6 @@ export class ShopService {
 
   //user stuff
   private user: User | null = null;
-  private tokenTimer: NodeJS.Timer | null = null;
   private userListener: Subject<User[]> = new Subject();
   private currentUser: User | undefined;
   private currentUserListener: Subject<User | undefined> = new Subject();
@@ -78,30 +77,6 @@ export class ShopService {
 
 
 
-  //user stuff
-  login(userName: string, password: string): Observable<{ message: string, token?: string }> {
-    return this.http.post<{ message: string, token?: string }>(this.API_URL + "login", { userName, password });
-  }
-
-  // Create new user
-  createUser(userName: string, password: string): Observable<User> {
-    return this.http.post<User>(this.API_URL + "signup", { userName, password });
-  }
-
-  // Get user by ID
-  getUserById(userId: string): Observable<{ user: User | undefined, message: string }> {
-    return this.http.get<{ user: User | undefined, message: string }>(this.API_URL + "user/" + userId);
-  }
-
-  getCurrentUser(): User | undefined {
-    return this.currentUser;
-  }
-  getCurrentUserListener(): Observable<User | undefined> {
-    return this.currentUserListener.asObservable();
-  }
-  getUserListener(): Observable<User[]> {
-    return this.userListener.asObservable();
-  }
 
   //calls needed:
   /* call for get items, 

@@ -1,31 +1,39 @@
-import { Component } from '@angular/core';
-import { ShopService } from '../services/shop.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import AuthService from '../services/auth.service';
 
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })
-export class SigninComponent {
-  username: string = '';
-  password: string = '';
-  error: string = '';
+export class SigninComponent implements OnInit {
 
-  constructor(private shopService: ShopService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router) { }
 
-  signin(): void {
-    this.shopService.login(this.username, this.password).subscribe(response => {
-      if (response.token) {
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/profile']);
-      } else {
-        this.error = response.message;
+  ngOnInit() {
+    this.authService.getUserListener().subscribe(
+      (user) => {
+        if (user !== null) {
+          this.router.navigate(['/']);
+        }
+        else {
+          this.router.navigate(['/profile']);
+
+        }
       }
-    }, error => {
-      console.error('Error during login:', error);
-      this.error = 'An unexpected error occurred. Please try again later.';
-    });
+    )
   }
+
+  login(form: NgForm) {
+    this.authService.login({
+      userName: form.value.userName,
+      password: form.value.password
+    })
+  }
+
 }
 

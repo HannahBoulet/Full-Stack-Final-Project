@@ -11,10 +11,9 @@ import { MakeAccountComponent } from './make-account/make-account.component';
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "cart", component: CartPageComponent },
-  { path: "signin", component: SigninComponent },
+  { path: "login", component: SigninComponent },
   { path: "profile", component: ProfileComponent },
   { path: "register", component: MakeAccountComponent },
-
   { path: "about", component: AboutComponent },
   { path: "items", component: ItemPageComponent },
   { path: "items/:itemName", component: ItemPageComponent }
