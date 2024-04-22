@@ -6,9 +6,9 @@ import logger from 'morgan';
 import passport from 'passport';
 import apiRouter from './app_api/routes/api';
 
+require('dotenv').config({ path: __dirname + '/.env' });
 require('./app_api/models/db');
 require('./app_api/config/passport');
-
 
 const app = express();
 

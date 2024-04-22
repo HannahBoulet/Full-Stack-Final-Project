@@ -20,7 +20,8 @@ export default class AuthenticationController {
                     .json({ token, user });
             })
             .catch((error) => {
-                res.status(300).json({ error });
+                console.error("Registration Error:", error);
+                res.status(300).json({ error: "User registration failed: " + error.message });
             })
     };
 

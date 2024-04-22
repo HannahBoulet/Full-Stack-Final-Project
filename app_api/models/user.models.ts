@@ -15,7 +15,6 @@ export interface IUser extends Document {
     validPassword: (pasword: string) => boolean,
     generateJwt: () => Jwt,
     shoppingCart: Types.ObjectId[],
-    _v: String
 }
 
 const userSchema: Schema = new Schema({
