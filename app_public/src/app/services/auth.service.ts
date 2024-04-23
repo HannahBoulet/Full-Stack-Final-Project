@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import User from '../models/user.model';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +16,23 @@ export default class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(user: User, password: string) {
-    this.http.post<{ token: string } | { error: any }>(this.API_URL + "register", {
-      userName: user.userName,
-      password
-    }).subscribe((response) => {
-      if ("error" in response) {
-        console.log(response.error);
-      }
-      else {
-        const token = response.token;
-        localStorage.setItem(this.TOKEN_KEY, token);
-        this.user = user;
-        this.userListener.next(this.user);
-      }
-
-
-    })
+  register({ user, password }: { user: User, password: string }) {
+    this.http.post<{ token: string, user: User } | { error: any }>(this.API_URL + "register",
+      {
+        userName: user.userName,
+        password
+      })
+      .subscribe((response) => {
+        if ("error" in response) {
+          console.log(response.error);
+        }
+        else {
+          const token = response.token;
+          localStorage.setItem(this.TOKEN_KEY, token);
+          this.user = response.user;
+          this.userListener.next(this.user);
+        }
+      })
   }
 
   login({ userName, password }: { userName: string, password: string }) {
@@ -92,5 +92,19 @@ export default class AuthService {
     this.user = null;
     this.userListener.next(null);
   }
+
+  updatePassword({ userName, newPassword }: { userName: string, newPassword: string }) {
+    this.http.put<{ message: string, updatedUser: User } | { error: any }>(this.API_URL + "profile/" + userName, { newPassword })
+      .subscribe((response) => {
+        if ("error" in response) {
+          console.log(response.error);
+        } else {
+          console.log(response.message);
+          const updatedUser = response.updatedUser;
+          this.userListener.next(updatedUser);
+        }
+      });
+  }
+
 }
 

@@ -1,1 +1,15 @@
-<p>profile works!</p>
+<div *ngIf="user" class="profile">
+    <h2>Welcome, {{ user.userName }}!</h2>
+
+    <div class="user-info">
+        <label>Username: </label>
+        <span>{{ user.userName }}</span>
+    </div>
+
+    <div class="change-password">
+        <h3>Change Password</h3>
+        <label for="newPassword">New Password: </label>
+        <input type="password" id="newPassword" name="newPassword" [(ngModel)]="newPassword">
+        <button (click)="changePassword()">Change Password</button>
+    </div>
+</div>

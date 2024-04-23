@@ -1,1 +1,13 @@
-<p>make-account works!</p>
+<main>
+    <form (ngSubmit)="register(registerForm)" #registerForm="ngForm">
+        <mat-form-field>
+            <label for="userName">UserName</label>
+            <input type="text" name="userName" id="userName" ngModel matInput />
+        </mat-form-field>
+        <mat-form-field>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" ngModel matInput />
+        </mat-form-field>
+        <button type="submit" mat-stroked-button>Submit</button>
+    </form>
+</main>

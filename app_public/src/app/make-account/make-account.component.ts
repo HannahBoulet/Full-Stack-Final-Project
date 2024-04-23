@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import AuthService from '../services/auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-make-account',
@@ -6,8 +9,21 @@ import { Component } from '@angular/core';
   styleUrl: './make-account.component.css'
 })
 export class MakeAccountComponent {
-  //make account needs:
-  /* 
-post to make the user account
-  */
+
+  constructor(private authService: AuthService, private router: Router) { }
+  ngOnInit() {
+    this.authService.getUserListener().subscribe(
+      (user) => {
+        if (user !== null) {
+          this.router.navigate(['/']);
+        }
+      })
+  }
+
+  register(form: NgForm) {
+    this.authService.register({
+      user: { userName: form.value.userName },
+      password: form.value.password
+    });
+  }
 }

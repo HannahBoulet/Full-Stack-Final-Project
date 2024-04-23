@@ -9,6 +9,7 @@ const authCtrl = new AuthCtrl();
 router.route("/user/:userName").get(authCtrl.getUser);
 router.route("/user/login").post(authCtrl.login);
 router.route("/user/register").post(authCtrl.register);
+router.route("/user/profile/:userName").put(authCtrl.updateUser);
 
 
 router.route('/user')

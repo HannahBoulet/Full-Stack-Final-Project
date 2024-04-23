@@ -1,35 +1,30 @@
-<header>
-    <nav>
-        <ul>
-            <ng-container *ngIf="isLoggedIn">
-                <li *ngFor="let link of links.loggedIn; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
-                    <a [routerLink]="link.path" mat-button>
-                        <ng-container *ngIf="link.name === 'Cart'">
-                            <img src="../../assets/shopping-cart-outline-svgrepo-com.svg" alt="Cart" class="svg-icon">
-                        </ng-container>
-                        <ng-container *ngIf="link.name === 'profile' || link.name === 'LogIn'">
-                            <img src="../../assets/profile-svgrepo-com.svg" alt="Profile" class="svg-icon">
-                        </ng-container>
-                        {{link.name}}
-                    </a>
-                </li>
-            </ng-container>
-            <ng-container *ngIf="!isLoggedIn">
-                <li *ngFor="let link of links.loggedOut; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
-                    <a [routerLink]="link.path" mat-button>
-                        <ng-container *ngIf="link.name === 'Cart'">
-                            <img src="../../assets/shopping-cart-outline-svgrepo-com.svg" alt="Cart" class="svg-icon">
-                        </ng-container>
-                        <ng-container *ngIf="link.name === 'profile' || link.name === 'LogIn'">
-                            <img src="../../assets/profile-svgrepo-com.svg" alt="Profile" class="svg-icon">
-                        </ng-container>
-                        {{link.name}}
-                    </a>
-                </li>
-            </ng-container>
-            <li class="rightLink" *ngIf="isLoggedIn">
+<nav>
+    <ul>
+        <ng-container *ngIf="isLoggedIn">
+            <li *ngFor="let link of links.loggedIn; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
+                <a [routerLink]="link.path" mat-button style="color: black;">
+                    <ng-container *ngIf="link.name === 'profile'">
+                        <img *ngIf="link.path === '/profile'" src="../../assets/profile-svgrepo-com.svg" alt="Profile"
+                            class="svg-icon">
+                    </ng-container>
+                    <ng-container *ngIf="link.name === 'Cart'">
+                        <img *ngIf="link.path === '/cart'" src="../../assets/shopping-cart-outline-svgrepo-com.svg"
+                            alt="Cart" class="svg-icon">
+                    </ng-container>
+                    <span *ngIf="link.name !== 'profile' && link.name !== 'Cart'">{{link.name}}</span>
+                </a>
+            </li>
+            <li class=" rightLink" *ngIf="isLoggedIn">
                 <a (click)="logout()" mat-button>Log Out</a>
             </li>
-        </ul>
-    </nav>
-</header>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+            <li *ngFor="let link of links.loggedOut; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
+                <a [routerLink]="link.path" mat-button style="color: black;">
+                    <span>{{link.name}}</span>
+                </a>
+            </li>
+        </ng-container>
+
+    </ul>
+</nav>

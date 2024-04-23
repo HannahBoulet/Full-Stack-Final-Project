@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { ProfileComponent } from './profile/profile.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MakeAccountComponent,
     HeaderComponent,
     ProfileComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

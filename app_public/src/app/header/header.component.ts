@@ -29,12 +29,13 @@ export class HeaderComponent {
     ],
     loggedOut: [
       { path: "/", name: "Home" },
-      { path: "login", name: "LogIn" },
-      { path: "register", name: "Register" }
+      { path: "/login", name: "LogIn" },
+      { path: "/about", name: "About" },
     ]
   }
   logout() {
     this.authService.logout();
+    this.isLoggedIn = false;
   }
 
 

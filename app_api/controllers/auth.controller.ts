@@ -67,6 +67,41 @@ export default class AuthenticationController {
                     .json({ message: "error retrieving user", error })
             })
     }
+    updateUser = (req: Request, res: Response, next: NextFunction) => {
+        const { userName, newPassword } = req.body;
+
+        // Check if both username and new password are provided
+        if (!userName || !newPassword) {
+            return res.status(400).json({ "error": "Username and new password are required" });
+        }
+
+        // Find the user by username
+        User.findOne({ userName })
+            .then((user: IUser | null) => {
+                if (!user) {
+                    return res.status(404).json({ message: "User not found" });
+                }
+
+                // Set the new password for the user
+                user.setPassword(newPassword);
+
+                // Save the updated user
+                user.save()
+                    .then((updatedUser: IUser) => {
+                        res.status(200).json({ message: "Password updated successfully", updatedUser });
+                    })
+                    .catch((error: any) => {
+                        res.status(500).json({ error: "Error updating password", message: error.message });
+                    });
+            })
+            .catch((error: any) => {
+                res.status(500).json({ error: "Error finding user", message: error.message });
+            });
+    };
+
+
+
+
 
 
 
