@@ -64,6 +64,23 @@ export class ShopService {
         this.currentItemListener.next(this.currentItem);
       });
   }
+  getItembyId(id: string) {
+    this.http.get<{ item: IItems, message: string }>(this.API_URL + "items/id/" + id)
+      .subscribe((res: { item: IItems | undefined, message: string }) => {
+        if (res.item) {
+          this.currentItem = {
+            id: res.item._id,
+            itemName: res.item.itemName,
+            image: res.item.image,
+            description: res.item.description,
+            price: res.item.price,
+          };
+        } else {
+          this.currentItem = undefined;
+        }
+        this.currentItemListener.next(this.currentItem);
+      });
+  }
 
 
   getCurrentItem(): Items | undefined {
@@ -101,6 +118,25 @@ export class ShopService {
   getCartListener(): Observable<string[]> {
     return this.cartListener.asObservable();
   }
+  // Modify ShopService to fetch cart items for the current user
+  getUserCart(): void {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser) {
+      console.error("No user logged in.");
+      return;
+    }
+
+    this.http.get<string[]>(`${this.API_URL}user/${currentUser.userName}/cart`).subscribe(
+      (cartItems: string[]) => {
+        this.cart = cartItems;
+        this.cartListener.next(this.cart);
+      },
+      error => {
+        console.error("Failed to fetch user's cart:", error);
+      }
+    );
+  }
+
 
 
 }

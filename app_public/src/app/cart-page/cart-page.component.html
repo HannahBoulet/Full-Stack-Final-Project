@@ -1,1 +1,25 @@
-<p>cart-page works!</p>
+<div class="shopping-cart" *ngIf="cartItems.length > 0; else emptyCart">
+    <h2>Your Cart</h2>
+    <div class="cart-items">
+        <div *ngFor="let itemId of cartItems" class="cart-item-container">
+            <div class="cart-item">
+                <ng-container *ngIf="getItemById(itemId) as item">
+                    <div class="item-details">
+                        <h3>{{ item.itemName }}</h3>
+                        <p class="item-price">Price: {{ item.price }}</p>
+                        <p class="item-id">Item ID: {{ item.id }}</p>
+                    </div>
+                    <div class="item-image">
+                        <img [src]="item.image" alt="{{ item.itemName }} Image" width="100" height="100">
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #emptyCart>
+    <div class="empty-cart">
+        <p>Your cart is empty.</p>
+    </div>
+</ng-template>

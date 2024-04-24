@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import AuthenticationService from "../services/auth.service";
 import User from '../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import User from '../models/user.model';
 export class HeaderComponent {
   isLoggedIn = false;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();

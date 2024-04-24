@@ -10,6 +10,8 @@ router.route("/user/:userName").get(authCtrl.getUser);
 router.route("/user/login").post(authCtrl.login);
 router.route("/user/register").post(authCtrl.register);
 
+router.route('/user/:userName/cart')
+    .get(authCtrl.getUserCart);
 
 router.route('/user')
     .get(apiCtrl.getAllUsers);
@@ -35,6 +37,9 @@ router.route('/items/:id')
 router.route('/user/:userName/items/:itemId')
     .put(apiCtrl.addItemToCart)
     .delete(apiCtrl.deleteItemFromCart);
+
+
+
 
 
 

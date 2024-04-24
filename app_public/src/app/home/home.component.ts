@@ -36,6 +36,7 @@ export class HomeComponent {
     });
   }
   onSortDirectionChange() {
+    this.router.navigate(['/']);
     this.sortItems();
   }
 

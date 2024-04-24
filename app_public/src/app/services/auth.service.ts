@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import User from '../models/user.model';
 import { Observable, Subject, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export default class AuthService {
   user: User | null = null;
   userListener: Subject<User | null> = new Subject();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   register({ user, password }: { user: User, password: string }) {
     this.http.post<{ token: string, user: User } | { error: any }>(this.API_URL + "register",
@@ -91,6 +92,8 @@ export default class AuthService {
     localStorage.removeItem(this.TOKEN_KEY);
     this.user = null;
     this.userListener.next(null);
+    this.router.navigate(['/']);
+
   }
 
   getCurrentUser(): User | null {
