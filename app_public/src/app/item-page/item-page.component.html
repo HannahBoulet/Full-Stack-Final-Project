@@ -4,7 +4,8 @@
     <p>Description: {{ item.description }}</p>
     <p>Price: ${{ item.price }}</p>
     <p>Item ID: {{ item.id }}</p>
-    <button (click)="addToCart(item.id)">Add to Cart</button>
+    <button *ngIf="isUserLoggedIn()" (click)="addToCart(item.id)">Add to Cart</button>
+    <button *ngIf="!isUserLoggedIn()">Please <a routerLink="/login">sign in</a> to add to cart!</button>
 </div>
 
 <div class="other-items-container">

@@ -3,10 +3,6 @@
         <ng-container *ngIf="isLoggedIn">
             <li *ngFor="let link of links.loggedIn; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
                 <a [routerLink]="link.path" mat-button style="color: black;">
-                    <ng-container *ngIf="link.name === 'profile'">
-                        <img *ngIf="link.path === '/profile'" src="../../assets/profile-svgrepo-com.svg" alt="Profile"
-                            class="svg-icon">
-                    </ng-container>
                     <ng-container *ngIf="link.name === 'Cart'">
                         <img *ngIf="link.path === '/cart'" src="../../assets/shopping-cart-outline-svgrepo-com.svg"
                             alt="Cart" class="svg-icon">
@@ -15,7 +11,7 @@
                 </a>
             </li>
             <li class=" rightLink" *ngIf="isLoggedIn">
-                <a (click)="logout()" mat-button>Log Out</a>
+                <a (click)="logout()" mat-button style="color: black;">Log Out</a>
             </li>
         </ng-container>
         <ng-container *ngIf="!isLoggedIn">

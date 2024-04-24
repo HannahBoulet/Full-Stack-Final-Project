@@ -93,21 +93,10 @@ export default class AuthService {
     this.userListener.next(null);
   }
 
-  updatePassword({ userName, newPassword }: { userName: string, newPassword: string }) {
-    this.http.put<{ message: string, updatedUser: User } | { error: any }>(this.API_URL + "profile/" + userName, { newPassword })
-      .subscribe((response) => {
-        if ("error" in response) {
-          console.log(response.error);
-        } else {
-          console.log(response.message);
-          const updatedUser = response.updatedUser;
-          this.userListener.next(updatedUser);
-        }
-      });
-  }
   getCurrentUser(): User | null {
     return this.user;
   }
+
 
 
 }

@@ -18,7 +18,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { ProfileComponent } from './profile/profile.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FooterComponent } from './footer/footer.component';
 
@@ -34,7 +33,6 @@ import { FooterComponent } from './footer/footer.component';
     SigninComponent,
     MakeAccountComponent,
     HeaderComponent,
-    ProfileComponent,
     FooterComponent,
   ],
   imports: [

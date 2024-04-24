@@ -136,6 +136,21 @@ export default class ApiCtrl {
             });
     }
     //clears all items from cart
+    clearCart = (req: Request, res: Response, next: NextFunction): void => {
+        const userName = req.params["userName"]; // Assuming you're using userName to identify users
+
+        User.findOneAndUpdate({ userName: userName }, { $set: { shoppingCart: [] } })
+            .then(() => {
+                res.status(200).json({
+                    message: "All items removed from the cart successfully"
+                });
+            })
+            .catch((error) => {
+                res.status(400).json({
+                    message: "Failed to clear cart: " + error
+                });
+            });
+    };
     //users
     //update user logic  where user can change their password
     getAllUsers = (req: Request, res: Response, next: NextFunction): void => {
@@ -147,8 +162,6 @@ export default class ApiCtrl {
                 res.status(400).json(error);
             });
     }
-
-
 
 
 

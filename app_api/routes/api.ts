@@ -9,7 +9,6 @@ const authCtrl = new AuthCtrl();
 router.route("/user/:userName").get(authCtrl.getUser);
 router.route("/user/login").post(authCtrl.login);
 router.route("/user/register").post(authCtrl.register);
-router.route("/user/profile/:userName").put(authCtrl.updateUser);
 
 
 router.route('/user')
@@ -19,6 +18,9 @@ router.route('/user')
 router.route('/items')
     .get(apiCtrl.getAllItems)
     .post(apiCtrl.addItem);
+
+router.route('/clearcart/:userName')
+    .delete(apiCtrl.clearCart);
 
 router.route('/items/:itemName')
     .get(apiCtrl.getItem);
@@ -31,7 +33,7 @@ router.route('/items/:id')
     .delete(apiCtrl.deleteItem);
 
 router.route('/user/:userName/items/:itemId')
-    .post(apiCtrl.addItemToCart)
+    .put(apiCtrl.addItemToCart)
     .delete(apiCtrl.deleteItemFromCart);
 
 

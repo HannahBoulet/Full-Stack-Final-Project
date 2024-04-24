@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShopService } from '../services/shop.service';
 import Items from '../models/items.model';
+import AuthService from '../services/auth.service';
 
 @Component({
   selector: 'app-item-page',
@@ -13,7 +14,7 @@ export class ItemPageComponent implements OnInit {
   items: Items[] = [];
 
 
-  constructor(private route: ActivatedRoute, private shopService: ShopService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private shopService: ShopService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -39,6 +40,10 @@ export class ItemPageComponent implements OnInit {
   //if user not signed in dont show add to cart button but show please sign in to purchase items!
   addToCart(itemId: string): void {
     this.shopService.addToCart(itemId);
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
 }

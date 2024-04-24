@@ -25,7 +25,6 @@ export class HeaderComponent {
       { path: "/", name: "Home" },
       { path: "/about", name: "About" },
       { path: "/cart", name: "Cart" },
-      { path: "/profile", name: "profile" },
     ],
     loggedOut: [
       { path: "/", name: "Home" },

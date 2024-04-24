@@ -84,7 +84,7 @@ export class ShopService {
       return;
     }
 
-    this.http.post(this.API_URL + `user/${currentUser.userName}/items/${itemId}`, {}).subscribe(() => {
+    this.http.put(this.API_URL + `user/${currentUser.userName}/items/${itemId}`, {}).subscribe(() => {
       this.cart.push(itemId);
       this.cartListener.next(this.cart);
     }, error => {
