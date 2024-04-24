@@ -30,7 +30,7 @@ router.route('/items/:id')
     .put(apiCtrl.updateItem)
     .delete(apiCtrl.deleteItem);
 
-router.route('/user/:id/items/:itemId')
+router.route('/user/:userName/items/:itemId')
     .post(apiCtrl.addItemToCart)
     .delete(apiCtrl.deleteItemFromCart);
 

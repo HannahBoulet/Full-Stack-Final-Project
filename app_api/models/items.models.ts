@@ -1,7 +1,7 @@
 import { Schema, Document, model, Types } from "mongoose"
 
 export interface IItem extends Document {
-    _id: Types.ObjectId,
+    _id: String
     itemName: String,
     image: String,
     description: String,

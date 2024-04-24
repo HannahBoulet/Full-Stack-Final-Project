@@ -3,6 +3,7 @@ import Items, { IItems } from '../models/items.model';
 import User, { IUser } from '../models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import AuthService from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,11 @@ export class ShopService {
   private currentUserListener: Subject<User | undefined> = new Subject();
 
   //cart stuff
+  private cart: string[] = []; // Assuming cart holds item IDs
+  private cartListener: Subject<string[]> = new Subject();
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
   //calls to api
   //item calls
   getItems(): void {
@@ -33,12 +36,11 @@ export class ShopService {
       this.items = [];
       iitems.forEach((iitems: IItems) => {
         this.items.push({
-          id: iitems.id,
+          id: iitems._id,
           itemName: iitems.itemName,
           image: iitems.image,
           description: iitems.description,
           price: iitems.price,
-          v: iitems.v,
         })
       });
       this.itemListener.next(this.items);
@@ -50,12 +52,11 @@ export class ShopService {
       .subscribe((res: { item: IItems | undefined, message: string }) => {
         if (res.item) {
           this.currentItem = {
-            id: res.item.id,
+            id: res.item._id,
             itemName: res.item.itemName,
             image: res.item.image,
             description: res.item.description,
             price: res.item.price,
-            v: res.item.v
           };
         } else {
           this.currentItem = undefined;
@@ -75,15 +76,31 @@ export class ShopService {
     return this.itemListener.asObservable();
   }
 
+  //add the addtocart funcitionality where users can add to cart by the current username and the current item ID
+  addToCart(itemId: string): void {
+    const currentUser = this.authService.getCurrentUser(); // Get current user
+    if (!currentUser) {
+      console.error("No user logged in.");
+      return;
+    }
+
+    this.http.post(this.API_URL + `user/${currentUser.userName}/items/${itemId}`, {}).subscribe(() => {
+      this.cart.push(itemId);
+      this.cartListener.next(this.cart);
+    }, error => {
+      console.error("Failed to add item to the cart:", error);
+    });
+  }
+
+  // Get cart
+  getCart(): string[] {
+    return this.cart;
+  }
+
+  // Get cart listener
+  getCartListener(): Observable<string[]> {
+    return this.cartListener.asObservable();
+  }
 
 
-
-  //calls needed:
-  /* call for get items, 
-  call for item when user clicks on the item
-  have current user
-  have current cart
-  have current item
-  need to look more into the profiles/cart stuff (will be moving items around)
-   */
 }

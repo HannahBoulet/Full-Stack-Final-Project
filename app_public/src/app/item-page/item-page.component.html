@@ -3,6 +3,8 @@
     <img [src]="item.image" alt="{{ item.itemName }} Image">
     <p>Description: {{ item.description }}</p>
     <p>Price: ${{ item.price }}</p>
+    <p>Item ID: {{ item.id }}</p>
+    <button (click)="addToCart(item.id)">Add to Cart</button>
 </div>
 
 <div class="other-items-container">

@@ -105,6 +105,10 @@ export default class AuthService {
         }
       });
   }
+  getCurrentUser(): User | null {
+    return this.user;
+  }
+
 
 }
 

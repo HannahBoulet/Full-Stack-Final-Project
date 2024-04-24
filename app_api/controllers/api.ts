@@ -105,10 +105,9 @@ export default class ApiCtrl {
     // Inside the addItemToCart method:
 
     addItemToCart = (req: Request, res: Response, next: NextFunction): void => {
-        const userId = req.params["id"];
         const itemId = req.params["itemId"];
 
-        User.findByIdAndUpdate(userId, { $push: { shoppingCart: itemId } })
+        User.findOneAndUpdate({ userName: req.params["userName"] }, { $push: { shoppingCart: itemId } })
             .then(() => {
                 res.status(200).json({
                     message: "Item added to the cart successfully"
@@ -124,7 +123,7 @@ export default class ApiCtrl {
         const userId = req.params["id"];
         const itemId = req.params["itemId"];
 
-        User.findByIdAndUpdate(userId, { $pull: { shoppingCart: itemId } })
+        User.findOneAndUpdate({ userName: req.params["userName"] }, { $pull: { shoppingCart: itemId } })
             .then(() => {
                 res.status(200).json({
                     message: "Item removed from the cart successfully"
@@ -136,6 +135,7 @@ export default class ApiCtrl {
                 });
             });
     }
+    //clears all items from cart
     //users
     //update user logic  where user can change their password
     getAllUsers = (req: Request, res: Response, next: NextFunction): void => {

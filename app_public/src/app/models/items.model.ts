@@ -1,16 +1,16 @@
+import { Types } from "mongoose"
+
 export default interface Items {
-    id: String,
-    itemName: String,
-    image: String,
-    description: String,
+    id: string,
+    itemName: string,
+    image: string,
+    description: string,
     price: number
-    v: String
 }
 export interface IItems {
-    id: String,
-    itemName: String,
-    image: String,
-    description: String,
+    _id: string,
+    itemName: string,
+    image: string,
+    description: string,
     price: number
-    v: String
 }
