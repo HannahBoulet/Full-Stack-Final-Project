@@ -12,11 +12,15 @@
                     <div class="item-image">
                         <img [src]="item.image" alt="{{ item.itemName }} Image" width="100" height="100">
                     </div>
+                    <button (click)="deleteItemFromCart(itemId)" class="delete-item-btn">Remove from Cart</button>
                 </ng-container>
             </div>
         </div>
     </div>
+    <p class="total-price">Total Price: {{ totalPrice }}</p>
+    <button (click)="goToCheckout()">Proceed to Checkout</button>
 </div>
+
 
 <ng-template #emptyCart>
     <div class="empty-cart">

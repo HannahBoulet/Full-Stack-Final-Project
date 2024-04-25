@@ -1,1 +1,21 @@
-<p>checkout-page works!</p>
+<div class="checkout-page">
+    <h2>Checkout</h2>
+    <div class="total-price-section">
+        <p>Total Price (Including 3% Tax): {{ totalPriceWithTax }}</p>
+    </div>
+    <div class="credit-card-form">
+        <h3>Credit Card Information</h3>
+        <form>
+            <label for="creditCardNumber">Credit Card Number:</label>
+            <input type="text" id="creditCardNumber" name="creditCardNumber" [(ngModel)]="creditCardNumber" required>
+        </form>
+    </div>
+    <div class="address-form">
+        <h3>Address</h3>
+        <form>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" [(ngModel)]="address" required></textarea>
+        </form>
+    </div>
+    <button (click)="goToPayment()">Proceed to Payment</button>
+</div>

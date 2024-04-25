@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ShopService } from '../services/shop.service';
 import { Subscription } from 'rxjs';
 import Items from '../models/items.model'; // Assuming you have a model for items
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-page',
@@ -12,20 +13,23 @@ export class CartPageComponent {
   cartItems: string[] = [];
   cartSubscription: Subscription | undefined;
   items: Items[] = [];
+  totalPrice: number = 0;
 
 
-  constructor(private shopService: ShopService) { }
+
+  constructor(private shopService: ShopService, private router: Router) { }
 
   ngOnInit(): void {
     this.shopService.getUserCart(); // Fetch user's cart items
     this.cartSubscription = this.shopService.getCartListener().subscribe((cartItems: string[]) => {
       this.cartItems = cartItems;
+      this.calculateTotalPrice();
     });
     // Fetch items
     this.shopService.getItems();
     this.shopService.getItemListener().subscribe((items: Items[]) => {
       this.items = items;
-      console.log("Items:", this.items); // Add this line
+      this.calculateTotalPrice();
     });
   }
 
@@ -36,10 +40,21 @@ export class CartPageComponent {
     }
   }
   getItemById(itemId: string): Items | undefined {
-    const item = this.items.find(item => item.id === itemId);
-    console.log("Item:", item); // Add this line
-    return item;
+    return this.items.find(item => item.id === itemId);;
   }
 
+  deleteItemFromCart(itemId: string): void {
+    this.shopService.deleteItemFromCart(itemId);
+  }
+  calculateTotalPrice(): void {
+    this.totalPrice = this.cartItems.reduce((total, itemId) => {
+      const item = this.getItemById(itemId);
+      return total + (item ? item.price : 0); // Accumulate the price of each item
+    }, 0);
+  }
+  goToCheckout(): void {
+    localStorage.setItem('totalPrice', this.totalPrice.toString());
+    this.router.navigate(['//checkout']);
+  }
 
 }

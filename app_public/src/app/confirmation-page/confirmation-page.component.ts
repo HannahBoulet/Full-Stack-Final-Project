@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ShopService } from '../services/shop.service';
+
 
 @Component({
   selector: 'app-confirmation-page',
@@ -6,9 +9,23 @@ import { Component } from '@angular/core';
   styleUrl: './confirmation-page.component.css'
 })
 export class ConfirmationPageComponent {
-  //confirmation needs:
-  /* 
-  display user address, and say "package will be shipping in current date + 7 days" (if possible) (if i cant figure it out i will just put a random date
-  have a back home button
-  */
+  creditCardNumber: string = '';
+  address: string = '';
+  shippingDate: Date | undefined;
+
+  constructor(private router: Router, private shopService: ShopService) { }
+
+  ngOnInit(): void {
+    this.creditCardNumber = localStorage.getItem('creditCardNumber') || '';
+    this.address = localStorage.getItem('address') || '';
+    const currentDate = new Date();
+    this.shippingDate = new Date(currentDate.setDate(currentDate.getDate() + 7));
+  }
+
+  confirmOrder(): void {
+    this.shopService.clearCart();
+    localStorage.removeItem('creditCardNumber');
+    localStorage.removeItem('address');
+    this.router.navigate(['//']);
+  }
 }

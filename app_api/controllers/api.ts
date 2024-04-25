@@ -120,7 +120,6 @@ export default class ApiCtrl {
             });
     }
     deleteItemFromCart = (req: Request, res: Response, next: NextFunction): void => {
-        const userId = req.params["id"];
         const itemId = req.params["itemId"];
 
         User.findOneAndUpdate({ userName: req.params["userName"] }, { $pull: { shoppingCart: itemId } })

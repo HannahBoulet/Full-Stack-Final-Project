@@ -136,7 +136,29 @@ export class ShopService {
       }
     );
   }
+  deleteItemFromCart(itemId: string): void {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser) {
+      console.error("No user logged in.");
+      return;
+    }
 
+    this.http.delete(`${this.API_URL}user/${currentUser.userName}/items/${itemId}`).subscribe(() => {
+      // Remove only the first occurrence of itemId from the cart
+      const index = this.cart.indexOf(itemId);
+      if (index !== -1) {
+        this.cart.splice(index, 1);
+        this.cartListener.next(this.cart);
+      }
+    }, error => {
+      console.error("Failed to remove item from the cart:", error);
+    });
+  }
+
+  clearCart(): Observable<any> {
+    const currentUser = this.authService.getCurrentUser();
+    return this.http.delete<any>(`${this.API_URL}clearcart/${currentUser!.userName}`);
+  }
 
 
 }
