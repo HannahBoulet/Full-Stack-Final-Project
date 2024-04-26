@@ -1,12 +1,17 @@
-<div *ngIf="item">
-    <h2>{{ item.itemName }}</h2>
-    <img [src]="item.image" alt="{{ item.itemName }} Image">
-    <p>Description: {{ item.description }}</p>
-    <p>Price: ${{ item.price }}</p>
-    <p>Item ID: {{ item.id }}</p>
-    <button *ngIf="isUserLoggedIn()" (click)="addToCart(item.id)">Add to Cart</button>
-    <button *ngIf="!isUserLoggedIn()" routerLink="/login">Please Signin to add to cart!</button>
+<div *ngIf="item" class="container">
+    <div class="left-column">
+        <img [src]="item.image" alt="{{ item.itemName }} Image">
+    </div>
+    <div class="right-column">
+        <h1>{{ item.itemName }}</h1>
+        <p>Description: {{ item.description }}</p>
+        <p>Price: ${{ item.price }}</p>
+        <button *ngIf="isUserLoggedIn()" (click)="addToCart(item.id)">Add to Cart</button>
+        <button *ngIf="!isUserLoggedIn()" routerLink="/login">Please Signin to add to cart!</button>
+    </div>
 </div>
+
+
 
 <div class="other-items-container">
     <div *ngFor="let otherItem of items" class="other-item">

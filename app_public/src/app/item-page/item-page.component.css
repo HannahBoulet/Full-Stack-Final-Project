@@ -3,7 +3,6 @@
     overflow-x: auto;
     text-align: center;
     padding: 0 20px;
-    /* Enable horizontal scrolling if items overflow */
 }
 
 .other-item {
@@ -15,7 +14,13 @@
     width: calc(33.33% - 20px);
     max-width: 200px;
     height: 235px;
-    /* Adjust the spacing between items */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+    display: flex;
 }
 
 
@@ -31,4 +36,14 @@ h1 {
     font-size: 16px;
     color: #888;
     text-align: center;
+}
+
+.left-column {
+    width: 65%;
+    position: relative;
+}
+
+.right-column {
+    width: 35%;
+    margin-top: 60px;
 }
