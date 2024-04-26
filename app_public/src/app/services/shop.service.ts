@@ -26,6 +26,8 @@ export class ShopService {
   //cart stuff
   private cart: string[] = []; // Assuming cart holds item IDs
   private cartListener: Subject<string[]> = new Subject();
+  private oldCart: string[] = []; // Assuming cart holds item IDs
+  private oldCartListener: Subject<string[]> = new Subject();
 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
@@ -118,7 +120,12 @@ export class ShopService {
   getCartListener(): Observable<string[]> {
     return this.cartListener.asObservable();
   }
-  // Modify ShopService to fetch cart items for the current user
+
+  getUser(): Observable<User | null> {
+    return this.http.get<User>(this.API_URL + 'user');
+  }
+
+
   getUserCart(): void {
     const currentUser = this.authService.getCurrentUser();
     if (!currentUser) {
@@ -126,7 +133,7 @@ export class ShopService {
       return;
     }
 
-    this.http.get<string[]>(`${this.API_URL}user/${currentUser.userName}/cart`).subscribe(
+    this.http.get<string[]>(this.API_URL + `user/${currentUser.userName}/cart`).subscribe(
       (cartItems: string[]) => {
         this.cart = cartItems;
         this.cartListener.next(this.cart);
@@ -143,8 +150,7 @@ export class ShopService {
       return;
     }
 
-    this.http.delete(`${this.API_URL}user/${currentUser.userName}/items/${itemId}`).subscribe(() => {
-      // Remove only the first occurrence of itemId from the cart
+    this.http.delete(this.API_URL + `user/${currentUser.userName}/items/${itemId}`).subscribe(() => {
       const index = this.cart.indexOf(itemId);
       if (index !== -1) {
         this.cart.splice(index, 1);
@@ -157,8 +163,44 @@ export class ShopService {
 
   clearCart(): Observable<any> {
     const currentUser = this.authService.getCurrentUser();
-    return this.http.delete<any>(`${this.API_URL}clearcart/${currentUser!.userName}`);
+    return this.http.delete<any>(this.API_URL + `clearcart/${currentUser!.userName}`);
   }
+
+
+  //past order methods:
+  confirmOrder(itemId: string): Observable<any> {
+    const currentUser = this.authService.getCurrentUser();
+    return this.http.put<any>(this.API_URL + `user/${currentUser!.userName}/confirmOrder/${itemId}`, {});
+  }
+
+  getUserOldCart(): void {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser) {
+      console.error("No user logged in.");
+      return;
+    }
+
+    this.http.get<string[]>(this.API_URL + `user/${currentUser.userName}/oldCart`).subscribe(
+      (cartItems: string[]) => {
+        this.oldCart = cartItems;
+        this.oldCartListener.next(this.oldCart);
+      },
+      error => {
+        console.error("Failed to fetch user's oldCart:", error);
+      }
+    );
+  }
+
+  getOldCartListener(): Observable<string[]> {
+    return this.oldCartListener.asObservable();
+  }
+  getOldCart(): string[] {
+    return this.oldCart;
+  }
+
+
+
+
 
 
 }

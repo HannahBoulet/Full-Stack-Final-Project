@@ -150,6 +150,9 @@ export default class ApiCtrl {
                 });
             });
     };
+
+
+
     //users
     //update user logic  where user can change their password
     getAllUsers = (req: Request, res: Response, next: NextFunction): void => {
@@ -161,6 +164,27 @@ export default class ApiCtrl {
                 res.status(400).json(error);
             });
     }
+    confirmOrder = (req: Request, res: Response, next: NextFunction): void => {
+        const { userName, itemId } = req.params;
+
+        User.findOneAndUpdate(
+            { userName },
+            { $addToSet: { oldOrderCart: itemId } }, // Add itemId to oldOrderCart if it's unique
+            { new: true }
+        )
+            .then((user) => {
+                if (!user) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                res.status(200).json({ message: 'Order confirmed successfully' });
+            })
+            .catch((error) => {
+                res.status(400).json({ message: 'Failed to confirm order', error });
+            });
+    };
+
+
+
 
 
 

@@ -1,13 +1,18 @@
-<main>
-    <form (ngSubmit)="register(registerForm)" #registerForm="ngForm">
-        <mat-form-field>
-            <label for="userName">UserName</label>
-            <input type="text" name="userName" id="userName" ngModel matInput />
-        </mat-form-field>
-        <mat-form-field>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" ngModel matInput />
-        </mat-form-field>
-        <button type="submit" mat-stroked-button>Submit</button>
-    </form>
-</main>
+<body>
+    <main>
+        <div class="screen-1">
+            <h1>Register your account here!</h1>
+            <form (ngSubmit)="register(registerForm)" #registerForm="ngForm">
+                <mat-form-field>
+                    <label for="userName">UserName</label>
+                    <input type="text" name="userName" id="userName" ngModel matInput />
+                </mat-form-field>
+                <mat-form-field>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" ngModel matInput />
+                </mat-form-field>
+                <button type="submit" mat-stroked-button class="register-button">Submit</button>
+            </form>
+        </div>
+    </main>
+</body>

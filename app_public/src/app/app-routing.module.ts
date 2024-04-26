@@ -8,6 +8,7 @@ import { ItemPageComponent } from './item-page/item-page.component';
 import { MakeAccountComponent } from './make-account/make-account.component';
 import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
 import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "checkout", component: CheckoutPageComponent },
   { path: "comfirm", component: ConfirmationPageComponent },
 
+  { path: "profile", component: ProfileComponent },
 
   { path: "login", component: SigninComponent },
   { path: "register", component: MakeAccountComponent },

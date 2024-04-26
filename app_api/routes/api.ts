@@ -12,10 +12,12 @@ router.route("/user/register").post(authCtrl.register);
 
 router.route('/user/:userName/cart')
     .get(authCtrl.getUserCart);
+router.route('/user/:userName/oldCart')
+    .get(authCtrl.getUserOldCart);
+
 
 router.route('/user')
     .get(apiCtrl.getAllUsers);
-
 
 router.route('/items')
     .get(apiCtrl.getAllItems)
@@ -38,10 +40,7 @@ router.route('/user/:userName/items/:itemId')
     .put(apiCtrl.addItemToCart)
     .delete(apiCtrl.deleteItemFromCart);
 
-
-
-
-
+router.route('/user/:userName/confirmOrder/:itemId').put(apiCtrl.confirmOrder);
 
 
 export default router;

@@ -1,0 +1,26 @@
+<div class="profile-page" *ngIf="oldItems.length > 0; else emptyCart">
+    <div class="cart-items">
+        <h2>Past Item ordered!</h2>
+        <div *ngFor="let itemId of oldItems" class="cart-item-container">
+            <div class="cart-item">
+                <ng-container *ngIf="getItemById(itemId) as item">
+                    <div class="item-details">
+                        <h3>{{ item.itemName }}</h3>
+                        <p class="item-price">Price: ${{ item.price }}</p>
+                    </div>
+                    <div class="item-image">
+                        <img [src]="item.image" alt="{{ item.itemName }} Image" width="100" height="100">
+                    </div>
+                    <button (click)="reorderItem(itemId)">Reorder</button>
+
+                </ng-container>
+
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #emptyCart>
+    <div class="empty-cart">
+        <p>Order Items for them to appear here!</p>
+    </div>
+</ng-template>

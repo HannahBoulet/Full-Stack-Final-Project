@@ -15,6 +15,8 @@ export interface IUser extends Document {
     validPassword: (pasword: string) => boolean,
     generateJwt: () => Jwt,
     shoppingCart: String[],
+    oldOrderCart: String[],
+
 }
 
 const userSchema: Schema = new Schema({
@@ -28,7 +30,9 @@ const userSchema: Schema = new Schema({
     hash: String,
     salt: String,
 
-    shoppingCart: [{ type: String, ref: 'Item' }]
+    shoppingCart: [{ type: String, ref: 'Item' }],
+    oldOrderCart: [{ type: String, ref: 'Item' }]
+
 
 });
 userSchema.methods.setPassword = function (password: string) {
