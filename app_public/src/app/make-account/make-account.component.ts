@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrl: './make-account.component.css'
 })
 export class MakeAccountComponent {
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
   ngOnInit() {
@@ -21,9 +22,13 @@ export class MakeAccountComponent {
   }
 
   register(form: NgForm) {
-    this.authService.register({
-      user: { userName: form.value.userName },
-      password: form.value.password
-    });
+    const { userName, password } = form.value;
+
+    this.authService.register({ user: { userName }, password });
+
+    // Assuming the authService sets a flag indicating success/failure
+    if (!this.authService.isLoggedIn()) {
+      this.errorMessage = "Issue with Username or Password. Try again!";
+    }
   }
 }

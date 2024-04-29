@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import Items from '../models/items.model';
 import { ShopService } from '../services/shop.service';
 import { Router } from '@angular/router';
+import AuthService from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent {
   items: Items[] = [];
   sortedItems: Items[] = [];
   sortDirection: string = 'asc';
-  constructor(private shopService: ShopService, private router: Router) { }
+  constructor(private shopService: ShopService, private router: Router, private authService: AuthService) { }
   ngOnInit() {
     this.shopService.getItemListener().subscribe((items: Items[]) => {
       this.items = items;
@@ -35,9 +36,16 @@ export class HomeComponent {
       }
     });
   }
-  onSortDirectionChange() {
+  onSortDirectionChange(direction: string) {
     this.router.navigate(['/']);
+    this.sortDirection = direction;
     this.sortItems();
+  }
+  addToCart(itemId: string): void {
+    this.shopService.addToCart(itemId);
+  }
+  isUserLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
 

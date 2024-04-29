@@ -1,9 +1,9 @@
 import express from 'express';
-import ApiCtrl from '../controllers/api';
+import ShopCtrl from '../controllers/shop.controller';
 import AuthCtrl from '../controllers/auth.controller';
 
 const router = express.Router();
-const apiCtrl = new ApiCtrl();
+const shopCtrl = new ShopCtrl();
 const authCtrl = new AuthCtrl();
 
 router.route("/user/:userName").get(authCtrl.getUser);
@@ -17,30 +17,31 @@ router.route('/user/:userName/oldCart')
 
 
 router.route('/user')
-    .get(apiCtrl.getAllUsers);
+    .get(shopCtrl.getAllUsers);
 
 router.route('/items')
-    .get(apiCtrl.getAllItems)
-    .post(apiCtrl.addItem);
+    .get(shopCtrl.getAllItems)
+    .post(shopCtrl.addItem);
 
 router.route('/clearcart/:userName')
-    .delete(apiCtrl.clearCart);
+    .delete(shopCtrl.clearCart);
 
 router.route('/items/:itemName')
-    .get(apiCtrl.getItem);
+    .get(shopCtrl.getItem);
 
 router.route('/items/id/:id')
-    .get(apiCtrl.getItembyID);
+    .get(shopCtrl.getItembyID);
 
 router.route('/items/:id')
-    .put(apiCtrl.updateItem)
-    .delete(apiCtrl.deleteItem);
+    .put(shopCtrl.updateItem)
+    .delete(shopCtrl.deleteItem);
 
 router.route('/user/:userName/items/:itemId')
-    .put(apiCtrl.addItemToCart)
-    .delete(apiCtrl.deleteItemFromCart);
+    .put(shopCtrl.addItemToCart)
+    .delete(shopCtrl.deleteItemFromCart);
 
-router.route('/user/:userName/confirmOrder/:itemId').put(apiCtrl.confirmOrder);
+router.route('/user/:userName/confirmOrder/:itemId')
+    .put(shopCtrl.confirmOrder);
 
 
 export default router;

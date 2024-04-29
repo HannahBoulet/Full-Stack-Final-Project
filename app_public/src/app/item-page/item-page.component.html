@@ -1,6 +1,6 @@
 <div *ngIf="item" class="container">
     <div class="left-column">
-        <img [src]="item.image" alt="{{ item.itemName }} Image">
+        <img [src]="item.image" alt="{{ item.itemName }} Image" class="item-image">
     </div>
     <div class="right-column">
         <h1>{{ item.itemName }}</h1>
@@ -17,7 +17,7 @@
     <div *ngFor="let otherItem of items" class="other-item">
         <mat-card>
             <mat-card-content [routerLink]="'/items/' + otherItem?.itemName">
-                <img class="item-image" [src]="otherItem.image" alt="{{ otherItem.itemName }} Image">
+                <img class="otheritem-image" [src]="otherItem.image" alt="{{ otherItem.itemName }} Image">
                 <h4>{{ otherItem.itemName }}</h4>
                 <h1>${{ otherItem.price }}</h1>
             </mat-card-content>

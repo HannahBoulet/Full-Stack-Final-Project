@@ -69,13 +69,11 @@ export default class AuthenticationController {
     }
     getUserCart(req: Request, res: Response, next: NextFunction) {
         const { userName } = req.params;
-        // Assuming the user's cart is stored in the user document in the database
         User.findOne({ userName })
             .then(user => {
                 if (!user) {
                     return res.status(404).json({ error: "User not found" });
                 }
-                // Assuming the cart is an array of item IDs in the user document
                 const cartItems = user.shoppingCart;
                 res.status(200).json(cartItems);
             })
@@ -87,13 +85,11 @@ export default class AuthenticationController {
 
     getUserOldCart(req: Request, res: Response, next: NextFunction) {
         const { userName } = req.params;
-        // Assuming the user's cart is stored in the user document in the database
         User.findOne({ userName })
             .then(user => {
                 if (!user) {
                     return res.status(404).json({ error: "User not found" });
                 }
-                // Assuming the cart is an array of item IDs in the user document
                 const oldItems = user.oldOrderCart;
                 res.status(200).json(oldItems);
             })

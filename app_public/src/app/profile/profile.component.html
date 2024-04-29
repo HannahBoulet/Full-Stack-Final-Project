@@ -1,3 +1,6 @@
+<div>
+    <p>Welcome current user</p>
+</div>
 <div class="profile-page" *ngIf="oldItems.length > 0; else emptyCart">
     <div class="cart-items">
         <h2>Past Item ordered!</h2>
@@ -5,22 +8,19 @@
             <div class="cart-item">
                 <ng-container *ngIf="getItemById(itemId) as item">
                     <div class="item-details">
-                        <h3>{{ item.itemName }}</h3>
-                        <p class="item-price">Price: ${{ item.price }}</p>
-                    </div>
-                    <div class="item-image">
-                        <img [src]="item.image" alt="{{ item.itemName }} Image" width="100" height="100">
+                        <h1>{{ item.itemName }}</h1>
+                        <h1 class="item-price">Price: ${{ item.price }}</h1>
+                        <img class="item-image" [src]="item.image" alt="{{ item.itemName }} Image" width="100"
+                            height="100">
                     </div>
                     <button (click)="reorderItem(itemId)">Reorder</button>
-
                 </ng-container>
-
             </div>
         </div>
     </div>
 </div>
 <ng-template #emptyCart>
     <div class="empty-cart">
-        <p>Order Items for them to appear here!</p>
+        <p>You have never ordered any items! Order items to see past ordered items!</p>
     </div>
 </ng-template>

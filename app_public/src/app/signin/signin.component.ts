@@ -9,6 +9,8 @@ import AuthService from '../services/auth.service';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent implements OnInit {
+  errorMessage: string = '';
+
 
   constructor(
     private authService: AuthService,
@@ -21,8 +23,7 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['/']);
         }
         else {
-          this.router.navigate(['/profile']);
-
+          this.router.navigate(['//profile']);
         }
       }
     )
@@ -32,7 +33,10 @@ export class SigninComponent implements OnInit {
     this.authService.login({
       userName: form.value.userName,
       password: form.value.password
-    })
+    });
+    if (!this.authService.isLoggedIn()) {
+      this.errorMessage = "Incorrect username or password";
+    }
   }
 
 }

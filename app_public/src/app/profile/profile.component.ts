@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   cartSubscription: Subscription | undefined;
   items: Items[] = [];
 
+
   constructor(private shopService: ShopService) { }
 
   ngOnInit(): void {

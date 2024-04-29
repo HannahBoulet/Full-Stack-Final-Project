@@ -11,6 +11,8 @@
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" ngModel matInput />
                 </mat-form-field>
+                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
                 <button type="submit" mat-stroked-button class="register-button">Submit</button>
             </form>
         </div>

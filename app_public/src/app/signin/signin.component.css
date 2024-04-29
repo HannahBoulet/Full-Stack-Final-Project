@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: hsl(220, 2%, 27%);
+    background: hsl(0, 0%, 98%);
     height: 100vh;
 }
 
@@ -26,13 +26,12 @@ mat-form-field {
 .login-button {
     margin-top: 1em;
     background: hsl(0, 1%, 48%);
-    box-shadow: 0 0 2em hsl(231deg 62% 94%);
     padding: 1em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
     border-radius: 20px;
-    color: hsl(0deg 0% 30%);
+    color: hsl(0, 0%, 0%);
 }
 
 .button-container {
@@ -44,12 +43,11 @@ button {
 }
 
 .screen-1 {
-    background: hsl(213deg 85% 97%);
+    background: hsl(0, 0%, 50%);
     padding: 2em;
     display: flex;
     flex-direction: column;
     border-radius: 30px;
-    box-shadow: 0 0 2em hsl(231deg 62% 94%);
     gap: 2em;
 }
 
@@ -60,7 +58,6 @@ button {
 .screen-1 .userName,
 .screen-1 .password {
     background: hsl(0, 40%, 77%);
-    box-shadow: 0 0 2em hsl(231deg 62% 94%);
     padding: 1em;
     display: flex;
     flex-direction: column;

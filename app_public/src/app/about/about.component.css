@@ -1,33 +1,72 @@
-.about-container {
-    background-image: url('../../assets/about.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 389px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
-.about-text {
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+.column {
+    float: left;
+    width: 40%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    padding-left: 125px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+
+}
+
+
+.about-section {
+    padding: 50px;
     text-align: center;
+    background-color: #474e5d;
     color: white;
+    background-image: url("../../assets/about.jpg");
+    background-size: cover;
+    /* Adjust as needed */
+    background-position: center;
+    /* Adjust as needed */
+
 }
 
 .container {
-    display: flex;
+    padding: 100px;
+    margin: 0 auto;
 }
 
-.left {
-    flex: 1;
-    padding-left: 600px;
+.card img {
+    padding-top: 20px;
+    padding-left: 120px;
+    width: 500px;
+    height: 500px;
 }
 
-.right {
-    flex: 4;
-    padding-right: 1px;
+.container::after,
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
-.image-size {
-    width: 300px;
-    height: 300px;
+.title {
+    color: grey;
+}
+
+@media screen and (max-width: 650px) {
+    .container {
+        padding: 10px;
+        /* Adjust padding for smaller screens */
+    }
 }

@@ -3,9 +3,7 @@ import User from '../models/user.models';
 import Item from '../models/items.models';
 
 
-export default class ApiCtrl {
-
-
+export default class ShopCtrl {
     //item logic
     getAllItems = (req: Request, res: Response, next: NextFunction): void => {
         Item.find()
@@ -136,7 +134,7 @@ export default class ApiCtrl {
     }
     //clears all items from cart
     clearCart = (req: Request, res: Response, next: NextFunction): void => {
-        const userName = req.params["userName"]; // Assuming you're using userName to identify users
+        const userName = req.params["userName"];
 
         User.findOneAndUpdate({ userName: userName }, { $set: { shoppingCart: [] } })
             .then(() => {
@@ -151,10 +149,6 @@ export default class ApiCtrl {
             });
     };
 
-
-
-    //users
-    //update user logic  where user can change their password
     getAllUsers = (req: Request, res: Response, next: NextFunction): void => {
         User.find()
             .then((users) => {
@@ -169,7 +163,7 @@ export default class ApiCtrl {
 
         User.findOneAndUpdate(
             { userName },
-            { $addToSet: { oldOrderCart: itemId } }, // Add itemId to oldOrderCart if it's unique
+            { $addToSet: { oldOrderCart: itemId } },
             { new: true }
         )
             .then((user) => {
