@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import AuthService from '../services/auth.service';
+import AuthService from '../auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-make-account',
-  templateUrl: './make-account.component.html',
-  styleUrl: './make-account.component.css'
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.css'
 })
-export class MakeAccountComponent {
+export class RegisterComponent {
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }

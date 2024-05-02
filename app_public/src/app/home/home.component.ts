@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import Items from '../models/items.model';
 import { ShopService } from '../services/shop.service';
 import { Router } from '@angular/router';
-import AuthService from '../services/auth.service';
+import AuthService from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',

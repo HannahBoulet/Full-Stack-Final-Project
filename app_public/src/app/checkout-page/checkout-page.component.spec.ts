@@ -10,8 +10,8 @@ describe('CheckoutPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [CheckoutPageComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(CheckoutPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

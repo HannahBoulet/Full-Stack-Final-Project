@@ -67,16 +67,16 @@ export default class AuthService {
     return this.userListener.asObservable();
   }
 
-  // autoLogIn(): void {
-  //   const token = localStorage.getItem(this.TOKEN_KEY);
-  //   if (token) {
-  //     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-  //     const expirationDate = new Date(tokenPayload.exp);
-  //     if (new Date().getTime() > expirationDate.getTime()) {
-  //       this.retrieveUser(tokenPayload.userName);
-  //     }
-  //   }
-  // }
+  autoLogIn(): void {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    if (token) {
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      const expirationDate = new Date(tokenPayload.exp);
+      if (new Date().getTime() > expirationDate.getTime()) {
+        this.retrieveUser(tokenPayload.userName);
+      }
+    }
+  }
 
   retrieveUser(userName: string): void {
     this.http.get<User | null>(this.API_URL + userName)
@@ -98,6 +98,9 @@ export default class AuthService {
 
   getCurrentUser(): User | null {
     return this.user;
+  }
+  getToken() {
+    return localStorage.getItem(this.TOKEN_KEY) ?? "";
   }
 
 

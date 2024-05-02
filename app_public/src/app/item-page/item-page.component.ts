@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ShopService } from '../services/shop.service';
 import Items from '../models/items.model';
-import AuthService from '../services/auth.service';
+import AuthService from '../auth/auth.service';
 
 @Component({
   selector: 'app-item-page',

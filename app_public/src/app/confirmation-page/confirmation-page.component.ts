@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ShopService } from '../services/shop.service';
-import AuthService from '../services/auth.service';
-
+import AuthService from '../auth/auth.service';
 
 @Component({
   selector: 'app-confirmation-page',
   templateUrl: './confirmation-page.component.html',
-  styleUrl: './confirmation-page.component.css'
+  styleUrls: ['./confirmation-page.component.css']
 })
 export class ConfirmationPageComponent {
   creditCardNumber: string = '';
+  expiryDate: string = '';
+  cvv: string = '';
   address: string = '';
   shippingDate: Date | undefined;
 
@@ -18,10 +19,16 @@ export class ConfirmationPageComponent {
 
   ngOnInit(): void {
     this.creditCardNumber = localStorage.getItem('creditCardNumber') || '';
+    this.expiryDate = localStorage.getItem('expiryDate') || '';
+    this.cvv = localStorage.getItem('cvv') || '';
     this.address = localStorage.getItem('address') || '';
+
+    // Generate a random shipping date between 5 and 100 days from today
     const currentDate = new Date();
-    this.shippingDate = new Date(currentDate.setDate(currentDate.getDate() + 7));
+    const randomShippingDays = Math.floor(Math.random() * (1000 - 5 + 1)) + 5;
+    this.shippingDate = new Date(currentDate.setDate(currentDate.getDate() + randomShippingDays));
   }
+
   confirmOrder(): void {
     // Clear cart
     this.shopService.clearCart().subscribe(() => {
@@ -37,13 +44,16 @@ export class ConfirmationPageComponent {
 
       // Clear local storage
       localStorage.removeItem('creditCardNumber');
+      localStorage.removeItem('expiryDate');
+      localStorage.removeItem('cvv');
       localStorage.removeItem('address');
+      localStorage.removeItem('city');
+      localStorage.removeItem('zipCode');
 
       // Navigate to home page
-      this.router.navigate(['/']);
+      this.router.navigate(['//']);
     }, error => {
       console.error('Failed to clear cart:', error);
     });
   }
-
 }

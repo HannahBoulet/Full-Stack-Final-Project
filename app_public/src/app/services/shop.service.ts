@@ -3,7 +3,7 @@ import Items, { IItems } from '../models/items.model';
 import User, { IUser } from '../models/user.model';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import AuthService from './auth.service';
+import AuthService from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,11 +1,37 @@
 html,
 body {
     height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    flex: 1;
+    position: relative;
+}
+
+.content-wrap {
+    flex: 1;
+}
+
+.footer {
+    position: sticky;
+    bottom: 0;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    padding: 1rem 0;
+}
+
+p {
     margin: 0;
-    font-family: 'Poppins', 'Roboto', "Helvetica Neue", sans-serif;
 }
 
 /* latin-ext */

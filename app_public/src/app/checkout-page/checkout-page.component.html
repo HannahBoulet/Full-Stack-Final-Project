@@ -8,6 +8,10 @@
         <form>
             <label for="creditCardNumber">Credit Card Number:</label>
             <input type="text" id="creditCardNumber" name="creditCardNumber" [(ngModel)]="creditCardNumber" required>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" [(ngModel)]="expiryDate" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" [(ngModel)]="cvv" required>
         </form>
     </div>
     <div class="address-form">
@@ -15,6 +19,10 @@
         <form>
             <label for="address">Address:</label>
             <textarea id="address" name="address" [(ngModel)]="address" required></textarea>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" [(ngModel)]="city" required>
+            <label for="zipCode">ZIP Code:</label>
+            <input type="text" id="zipCode" name="zipCode" [(ngModel)]="zipCode" required>
         </form>
     </div>
     <button (click)="goToPayment()">Proceed to Payment</button>
