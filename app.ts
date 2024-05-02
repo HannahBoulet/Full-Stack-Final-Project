@@ -4,7 +4,9 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import passport from 'passport';
-import apiRouter from './app_api/routes/api';
+import shopRouter from './app_api/routes/shop.routes'
+import authRouter from './app_api/routes/auth.routes'
+
 
 require('dotenv').config({ path: __dirname + '/.env' });
 require('./app_api/models/db');
@@ -23,7 +25,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'app_public', 'dist', 'app_public', 'browser')));
 app.use(passport.initialize());
-app.use('/api', apiRouter);
+app.use('/api', shopRouter);
+app.use('/api', authRouter);
+
 
 app.get('*', (req: Request, res: Response, next: NextFunction) => {
   if (req.path !== '/api') {
