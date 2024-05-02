@@ -1,4 +1,6 @@
 import express from 'express';
+import { auth } from '../middleware/auth';
+
 import ShopCtrl from '../controllers/shop.controller';
 import AuthCtrl from '../controllers/auth.controller';
 
@@ -11,8 +13,8 @@ router.route("/user/login").post(authCtrl.login);
 router.route("/user/register").post(authCtrl.register);
 
 router.route('/user/:userName/cart')
-    .get(authCtrl.getUserCart);
+    .get(auth, authCtrl.getUserCart);
 router.route('/user/:userName/oldCart')
-    .get(authCtrl.getUserOldCart);
+    .get(auth, authCtrl.getUserOldCart);
 
 export default router;

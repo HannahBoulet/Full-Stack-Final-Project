@@ -25,8 +25,6 @@ export class RegisterComponent {
     const { userName, password } = form.value;
 
     this.authService.register({ user: { userName }, password });
-
-    // Assuming the authService sets a flag indicating success/failure
     if (!this.authService.isLoggedIn()) {
       this.errorMessage = "Issue with Username or Password. Try again!";
     }

@@ -96,9 +96,7 @@ export default class AuthService {
 
   }
 
-  getCurrentUser(): User | null {
-    return this.user;
-  }
+
   getToken() {
     return localStorage.getItem(this.TOKEN_KEY) ?? "";
   }

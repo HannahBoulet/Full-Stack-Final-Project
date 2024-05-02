@@ -16,13 +16,6 @@ export class ShopService {
   private itemListener: Subject<Items[]> = new Subject();
   private currentItem: Items | undefined;
   private currentItemListener: Subject<Items | undefined> = new Subject();
-
-  //user stuff
-  private user: User | null = null;
-  private userListener: Subject<User[]> = new Subject();
-  private currentUser: User | undefined;
-  private currentUserListener: Subject<User | undefined> = new Subject();
-
   //cart stuff
   private cart: string[] = []; // Assuming cart holds item IDs
   private cartListener: Subject<string[]> = new Subject();
@@ -95,9 +88,8 @@ export class ShopService {
     return this.itemListener.asObservable();
   }
 
-  //add the addtocart funcitionality where users can add to cart by the current username and the current item ID
   addToCart(itemId: string): void {
-    const currentUser = this.authService.getCurrentUser(); // Get current user
+    const currentUser = this.authService.getUser(); // Get current user
     if (!currentUser) {
       console.error("No user logged in.");
       return;
@@ -127,11 +119,12 @@ export class ShopService {
 
 
   getUserCart(): void {
-    const currentUser = this.authService.getCurrentUser();
+    const currentUser = this.authService.getUser();
     if (!currentUser) {
       console.error("No user logged in.");
       return;
     }
+
 
     this.http.get<string[]>(this.API_URL + `user/${currentUser.userName}/cart`).subscribe(
       (cartItems: string[]) => {
@@ -144,7 +137,7 @@ export class ShopService {
     );
   }
   deleteItemFromCart(itemId: string): void {
-    const currentUser = this.authService.getCurrentUser();
+    const currentUser = this.authService.getUser();
     if (!currentUser) {
       console.error("No user logged in.");
       return;
@@ -162,19 +155,19 @@ export class ShopService {
   }
 
   clearCart(): Observable<any> {
-    const currentUser = this.authService.getCurrentUser();
+    const currentUser = this.authService.getUser();
     return this.http.delete<any>(this.API_URL + `clearcart/${currentUser!.userName}`);
   }
 
 
   //past order methods:
   confirmOrder(itemId: string): Observable<any> {
-    const currentUser = this.authService.getCurrentUser();
+    const currentUser = this.authService.getUser();
     return this.http.put<any>(this.API_URL + `user/${currentUser!.userName}/confirmOrder/${itemId}`, {});
   }
 
   getUserOldCart(): void {
-    const currentUser = this.authService.getCurrentUser();
+    const currentUser = this.authService.getUser();
     if (!currentUser) {
       console.error("No user logged in.");
       return;
