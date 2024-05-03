@@ -55,7 +55,7 @@ userSchema.methods.generateJwt = function () {
     return jwt.sign({
         _id: this._id,
         userName: this.userName,
-        exp: expiry.getTime() / 1000
+        exp: expiry.getTime()
     }, process.env.JWT_SECRET!);
 };
 

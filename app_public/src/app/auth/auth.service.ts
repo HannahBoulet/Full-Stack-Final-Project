@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import User from '../models/user.model';
-import { Observable, Subject, throwError } from 'rxjs';
-import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +10,14 @@ export default class AuthService {
   API_URL = "http://localhost:3000/api/user/";
   TOKEN_KEY = "";
 
-  //is logged in boolean
   user: User | null = null;
   userListener: Subject<User | null> = new Subject();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  private loggedIn: boolean = false;
+  private loggedInListener: Subject<boolean> = new Subject();
+
+
+  constructor(private http: HttpClient) { }
 
   register({ user, password }: { user: User, password: string }) {
     this.http.post<{ token: string, user: User } | { error: any }>(this.API_URL + "register",
@@ -31,7 +33,9 @@ export default class AuthService {
           const token = response.token;
           localStorage.setItem(this.TOKEN_KEY, token);
           this.user = response.user;
+          this.loggedIn = true;
           this.userListener.next(this.user);
+          this.loggedInListener.next(true);
         }
       })
   }
@@ -50,17 +54,22 @@ export default class AuthService {
           const token = response.token;
           localStorage.setItem(this.TOKEN_KEY, token);
           this.user = response.user;
+          this.loggedIn = true;
           this.userListener.next(this.user);
+          this.loggedInListener.next(true);
         }
       })
   }
 
-  isLoggedIn(): boolean {
-    return this.user !== null;
-  }
 
+  isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
   getUser(): User | null {
     return this.user;
+  }
+  getLoggedInListener(): Observable<boolean> {
+    return this.loggedInListener.asObservable();
   }
 
   getUserListener(): Observable<User | null> {
@@ -72,36 +81,37 @@ export default class AuthService {
     if (token) {
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       const expirationDate = new Date(tokenPayload.exp);
-      if (new Date().getTime() > expirationDate.getTime()) {
-        this.retrieveUser(tokenPayload.userName);
-      }
-    }
-  }
+      console.log("hit here");
+      console.log(expirationDate);
+      console.log(new Date());
 
-  retrieveUser(userName: string): void {
-    this.http.get<User | null>(this.API_URL + userName)
-      .subscribe((user: User | null) => {
-        if (user) {
-          this.user = user;
-          this.userListener.next(user);
+
+      if (new Date().getTime() < expirationDate.getTime()) {
+        console.log("auto LOGINWORK ");
+        this.user = {
+          userName: tokenPayload.userName,
         }
-      });
+        this.loggedIn = true;
+        this.userListener.next(this.user);
+        this.loggedInListener.next(true);
+      }
+      console.log("auto LOGIN NOT WORK ");
+
+    }
   }
 
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     this.user = null;
+    this.loggedIn = false;
     this.userListener.next(null);
-    this.router.navigate(['/']);
-
+    this.loggedInListener.next(false);
   }
 
 
   getToken() {
     return localStorage.getItem(this.TOKEN_KEY) ?? "";
   }
-
-
 
 }
 

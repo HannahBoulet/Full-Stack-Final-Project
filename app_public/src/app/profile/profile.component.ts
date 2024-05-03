@@ -3,6 +3,7 @@ import { ShopService } from '../services/shop.service';
 import AuthService from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import Items from '../models/items.model';
+import User from '../models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -15,11 +16,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   oldItems: string[] = [];
   cartSubscription: Subscription | undefined;
   items: Items[] = [];
+  currentUser: User | null = null;
 
 
-  constructor(private shopService: ShopService) { }
+  constructor(private shopService: ShopService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.currentUser = this.authService.getUser();
     this.shopService.getUserOldCart();
     this.cartSubscription = this.shopService.getOldCartListener().subscribe((cartItems: string[]) => {
       this.oldItems = cartItems;

@@ -47,10 +47,12 @@ html {
 }
 
 .card img {
-    padding-top: 20px;
-    padding-left: 120px;
-    width: 500px;
-    height: 500px;
+    max-width: 400px;
+    max-height: 400px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .container::after,

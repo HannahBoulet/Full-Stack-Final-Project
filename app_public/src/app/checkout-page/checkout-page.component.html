@@ -18,12 +18,17 @@
         <h3>Address</h3>
         <form>
             <label for="address">Address:</label>
-            <textarea id="address" name="address" [(ngModel)]="address" required></textarea>
+            <input type="text" id="address" name="address" [(ngModel)]="address" required>
             <label for="city">City:</label>
             <input type="text" id="city" name="city" [(ngModel)]="city" required>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" [(ngModel)]="state" required>
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" [(ngModel)]="country" required>
             <label for="zipCode">ZIP Code:</label>
             <input type="text" id="zipCode" name="zipCode" [(ngModel)]="zipCode" required>
         </form>
     </div>
+
     <button (click)="goToPayment()">Proceed to Payment</button>
 </div>

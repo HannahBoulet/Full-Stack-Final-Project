@@ -1,5 +1,3 @@
-import { Types } from "mongoose"
-
 export default interface Items {
     id: string,
     itemName: string,

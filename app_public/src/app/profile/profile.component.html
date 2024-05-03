@@ -1,5 +1,5 @@
 <div>
-    <p>Welcome current user</p>
+    <p>Welcome {{currentUser!.userName}}</p>
 </div>
 <div class="profile-page" *ngIf="oldItems.length > 0; else emptyCart">
     <div class="cart-items">

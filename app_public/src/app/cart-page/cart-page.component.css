@@ -17,8 +17,6 @@
     padding: 5px;
     margin: 10px;
     background-color: white;
-
-
 }
 
 .cart-item {
@@ -28,18 +26,44 @@
 
 .item-details {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .item-price {
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.delete-item-btn {
+    align-self: flex-start;
 }
 
 .item-image {
     margin-left: 20px;
+    padding-right: 30px;
+}
+
+.item-actions {
+    margin-top: 10px;
 }
 
 .empty-cart {
     text-align: center;
     margin-top: 20px;
     color: #888;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #353535;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #737373;
 }
