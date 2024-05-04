@@ -89,7 +89,7 @@ export class ShopService {
   }
 
   addToCart(itemId: string): void {
-    const currentUser = this.authService.getUser(); // Get current user
+    const currentUser = this.authService.getUser();
     if (!currentUser) {
       console.error("No user logged in.");
       return;
@@ -190,10 +190,5 @@ export class ShopService {
   getOldCart(): string[] {
     return this.oldCart;
   }
-
-
-
-
-
 
 }

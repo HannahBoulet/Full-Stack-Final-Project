@@ -22,7 +22,7 @@ export class CheckoutPageComponent {
 
   ngOnInit(): void {
     const totalPrice = parseFloat(localStorage.getItem('totalPrice') || '0');
-    this.totalPriceWithTax = totalPrice * 1.03; // Adding 3% tax
+    this.totalPriceWithTax = Math.round((totalPrice * 1.03) * 100) / 100;
   }
 
   goToPayment(): void {

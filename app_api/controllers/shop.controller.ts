@@ -13,7 +13,7 @@ export default class ShopCtrl {
             .catch((error) => {
                 res.status(400).json(error);
             });
-    }
+    };
     getItem = (req: Request, res: Response, next: NextFunction): void => {
         Item.findOne({ itemName: req.params["itemName"] })
             .then((item) => {
@@ -32,7 +32,7 @@ export default class ShopCtrl {
             .catch((error) => {
                 res.status(400)
             });
-    }
+    };
 
     getItembyID = (req: Request, res: Response, next: NextFunction): void => {
         Item.findById(req.params["id"])
@@ -52,7 +52,7 @@ export default class ShopCtrl {
             .catch((error) => {
                 res.status(400)
             });
-    }
+    };
 
     addItem = (req: Request, res: Response, next: NextFunction): void => {
         const { itemName, image, description, price } = req.body;
@@ -65,7 +65,7 @@ export default class ShopCtrl {
             .catch((error) => {
                 res.status(400).json(error);
             });
-    }
+    };
     updateItem = (req: Request, res: Response, next: NextFunction): void => {
         Item.findByIdAndUpdate(req.params["id"], {
             itemName: req.body["itemName"],
@@ -83,9 +83,7 @@ export default class ShopCtrl {
                     message: "failure: " + error
                 })
             })
-
-
-    }
+    };
     deleteItem = (req: Request, res: Response, next: NextFunction) => {
         Item.findByIdAndDelete(req.params["id"])
             .then(() => {
@@ -98,7 +96,7 @@ export default class ShopCtrl {
                     message: "error retrieving Item: " + error
                 })
             })
-    }
+    };
     //cart logic
     // Inside the addItemToCart method:
 
@@ -116,7 +114,7 @@ export default class ShopCtrl {
                     message: "Failed to add item to the cart: " + error
                 });
             });
-    }
+    };
     deleteItemFromCart = (req: Request, res: Response, next: NextFunction): void => {
         const itemId = req.params["itemId"];
 
@@ -131,7 +129,7 @@ export default class ShopCtrl {
                     message: "Failed to remove item from the cart: " + error
                 });
             });
-    }
+    };
     //clears all items from cart
     clearCart = (req: Request, res: Response, next: NextFunction): void => {
         const userName = req.params["userName"];
@@ -157,7 +155,7 @@ export default class ShopCtrl {
             .catch((error) => {
                 res.status(400).json(error);
             });
-    }
+    };
     confirmOrder = (req: Request, res: Response, next: NextFunction): void => {
         const { userName, itemId } = req.params;
 
@@ -176,10 +174,6 @@ export default class ShopCtrl {
                 res.status(400).json({ message: 'Failed to confirm order', error });
             });
     };
-
-
-
-
 
 
 }

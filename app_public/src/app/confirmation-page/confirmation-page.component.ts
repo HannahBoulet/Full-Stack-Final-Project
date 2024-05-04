@@ -37,20 +37,27 @@ export class ConfirmationPageComponent {
   }
 
   confirmOrder(): void {
-    this.shopService.clearCart();
-    const cartItems = this.shopService.getCart();
-    cartItems.forEach(itemId => {
-      this.shopService.confirmOrder(itemId);
-    });
-    localStorage.removeItem('creditCardNumber');
-    localStorage.removeItem('expiryDate');
-    localStorage.removeItem('cvv');
-    localStorage.removeItem('address');
-    localStorage.removeItem('city');
-    localStorage.removeItem('state');
-    localStorage.removeItem('country');
-    localStorage.removeItem('zipCode');
-    this.router.navigate(['//']);
+    this.shopService.clearCart().subscribe(() => {
+      const cartItems = this.shopService.getCart();
+      cartItems.forEach(itemId => {
+        this.shopService.confirmOrder(itemId).subscribe(() => {
+          console.log('Item added to past orders successfully');
+        }, error => {
+          console.error('Failed to add item to past orders:', error);
+        });
+      });
+      localStorage.removeItem('creditCardNumber');
+      localStorage.removeItem('expiryDate');
+      localStorage.removeItem('cvv');
+      localStorage.removeItem('address');
+      localStorage.removeItem('city');
+      localStorage.removeItem('state');
+      localStorage.removeItem('country');
+      localStorage.removeItem('zipCode');
 
+      this.router.navigate(['//']);
+    }, error => {
+      console.error('Failed to clear cart:', error);
+    });
   }
 }

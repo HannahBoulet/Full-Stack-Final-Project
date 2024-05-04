@@ -26,15 +26,17 @@
     background-color: gray;
 }
 
-
 .item-image {
+    width: 100%;
     max-width: 500px;
     max-height: 500px;
-    width: 100%;
+    min-width: 500px;
+    min-height: 500px;
     height: auto;
     display: block;
     margin: 0 auto;
 }
+
 
 .otheritem-image {
     width: 120px;
