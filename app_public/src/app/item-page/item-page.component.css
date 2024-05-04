@@ -3,6 +3,7 @@
     overflow-x: auto;
     text-align: center;
     padding: 0 20px;
+    flex-wrap: nowrap;
 }
 
 .other-item {
@@ -11,23 +12,28 @@
     padding: 5px;
     margin: 10px;
     background-color: white;
-    width: calc(33.33% - 20px);
-    max-width: 200px;
+    min-width: 250px;
+    flex-grow: 1;
     height: 235px;
 }
+
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
     display: flex;
+    background-color: gray;
 }
 
 
 .item-image {
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .otheritem-image {
@@ -36,7 +42,9 @@
     object-fit: cover;
 }
 
+
 button {
+    padding-top: 10px;
     padding: 10px 20px;
     background-color: #353535;
     color: #fff;
@@ -52,7 +60,13 @@ button:hover {
     background-color: #737373;
 }
 
-h4,
+h4 {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+}
+
 h1 {
     margin-top: 5px;
     font-size: 16px;
@@ -69,10 +83,18 @@ p {
 
 .left-column {
     width: 65%;
-    position: relative;
+
 }
 
 .right-column {
     width: 35%;
     margin-top: 60px;
+
+}
+
+.otheritemstext {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    text-align: left;
 }

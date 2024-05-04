@@ -1,26 +1,26 @@
-<nav>
-    <ul>
-        <ng-container *ngIf="isLoggedIn">
-            <li *ngFor="let link of links.loggedIn; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
-                <a [routerLink]="link.path" mat-button style="color: black;">
-                    <ng-container *ngIf="link.name === 'Cart'">
-                        <img *ngIf="link.path === '/cart'" src="../../assets/shopping-cart-outline-svgrepo-com.svg"
-                            alt="Cart" class="svg-icon">
-                    </ng-container>
-                    <span *ngIf="link.name !== 'profile' && link.name !== 'Cart'">{{link.name}}</span>
-                </a>
-            </li>
-            <li class=" rightLink" *ngIf="isLoggedIn">
-                <a (click)="logout()" mat-button style="color: black;">Log Out</a>
-            </li>
-        </ng-container>
-        <ng-container *ngIf="!isLoggedIn">
-            <li *ngFor="let link of links.loggedOut; index as i" [class]="i > 0 ? 'rightLink' : 'leftLink'">
-                <a [routerLink]="link.path" mat-button style="color: black;">
-                    <span>{{link.name}}</span>
-                </a>
-            </li>
-        </ng-container>
-
-    </ul>
-</nav>
+<header>
+    <div class="container">
+        <div class="logo">
+            <a [routerLink]="'/'">
+                <span class="icon icon-lilguy"></span>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <ng-container *ngIf="isLoggedIn; else loggedOutLinks">
+                    <li *ngFor="let link of links.loggedIn">
+                        <a [routerLink]="link.path">{{ link.name }}</a>
+                    </li>
+                    <li>
+                        <a (click)="logout()">Logout</a>
+                    </li>
+                </ng-container>
+                <ng-template #loggedOutLinks>
+                    <li *ngFor="let link of links.loggedOut">
+                        <a [routerLink]="link.path">{{ link.name }}</a>
+                    </li>
+                </ng-template>
+            </ul>
+        </nav>
+    </div>
+</header>

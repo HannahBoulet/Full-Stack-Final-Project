@@ -23,14 +23,12 @@ export class HeaderComponent implements OnInit {
 
   links = {
     loggedIn: [
-      { path: "/", name: "Home" },
       { path: "/about", name: "About" },
       { path: "/cart", name: "Cart" },
       { path: "/profile", name: "Profile" },
 
     ],
     loggedOut: [
-      { path: "/", name: "Home" },
       { path: "/login", name: "LogIn" },
       { path: "/about", name: "About" },
     ]

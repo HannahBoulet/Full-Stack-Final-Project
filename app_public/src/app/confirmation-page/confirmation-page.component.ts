@@ -13,6 +13,10 @@ export class ConfirmationPageComponent {
   expiryDate: string = '';
   cvv: string = '';
   address: string = '';
+  city: string = '';
+  state: string = '';
+  country: string = '';
+  zipCode: string = '';
   shippingDate: Date | undefined;
 
   constructor(private router: Router, private shopService: ShopService, private authService: AuthService) { }
@@ -22,38 +26,31 @@ export class ConfirmationPageComponent {
     this.expiryDate = localStorage.getItem('expiryDate') || '';
     this.cvv = localStorage.getItem('cvv') || '';
     this.address = localStorage.getItem('address') || '';
+    this.city = localStorage.getItem('city') || '';
+    this.state = localStorage.getItem('state') || '';
+    this.country = localStorage.getItem('country') || '';
+    this.zipCode = localStorage.getItem('zipCode') || '';
 
-    // Generate a random shipping date between 5 and 100 days from today
     const currentDate = new Date();
     const randomShippingDays = Math.floor(Math.random() * (1000 - 5 + 1)) + 5;
     this.shippingDate = new Date(currentDate.setDate(currentDate.getDate() + randomShippingDays));
   }
 
   confirmOrder(): void {
-    // Clear cart
-    this.shopService.clearCart().subscribe(() => {
-      // Add items to past orders
-      const cartItems = this.shopService.getCart();
-      cartItems.forEach(itemId => {
-        this.shopService.confirmOrder(itemId).subscribe(() => {
-          console.log('Item added to past orders successfully');
-        }, error => {
-          console.error('Failed to add item to past orders:', error);
-        });
-      });
-
-      // Clear local storage
-      localStorage.removeItem('creditCardNumber');
-      localStorage.removeItem('expiryDate');
-      localStorage.removeItem('cvv');
-      localStorage.removeItem('address');
-      localStorage.removeItem('city');
-      localStorage.removeItem('zipCode');
-
-      // Navigate to home page
-      this.router.navigate(['//']);
-    }, error => {
-      console.error('Failed to clear cart:', error);
+    this.shopService.clearCart();
+    const cartItems = this.shopService.getCart();
+    cartItems.forEach(itemId => {
+      this.shopService.confirmOrder(itemId);
     });
+    localStorage.removeItem('creditCardNumber');
+    localStorage.removeItem('expiryDate');
+    localStorage.removeItem('cvv');
+    localStorage.removeItem('address');
+    localStorage.removeItem('city');
+    localStorage.removeItem('state');
+    localStorage.removeItem('country');
+    localStorage.removeItem('zipCode');
+    this.router.navigate(['//']);
+
   }
 }

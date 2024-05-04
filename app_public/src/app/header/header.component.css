@@ -1,35 +1,53 @@
-nav {
-    background-color: #898787;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
+header {
+    background-color: #dbdbdb;
+    padding: 10px 0;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
+.logo img {
+    max-height: 80px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
 nav li {
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 nav a {
     text-decoration: none;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+    color: #333;
+    font-weight: bold;
 }
 
-.rightLink {
-    margin-left: auto;
+nav a:hover {
+    color: #6f6f6f;
 }
 
+.icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+}
 
-.svg-icon {
-    width: 24px;
-    height: 24px;
+.icon-lilguy {
+    background-image: url("../../assets/lilguypt2.svg");
+}
+
+.icon-lilguy:hover {
+    filter: invert(44%) sepia(6%) saturate(40%) hue-rotate(314deg) brightness(96%) contrast(85%);
+
 }

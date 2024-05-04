@@ -4,14 +4,16 @@
     </div>
     <div class="right-column">
         <h1>{{ item.itemName }}</h1>
-        <p>Description: {{ item.description }}</p>
-        <p>Price: ${{ item.price }}</p>
+        <p>{{ item.description }}</p>
+        <p>${{ item.price }}</p>
         <button *ngIf="isUserLoggedIn()" (click)="addToCart(item.id)">Add to Cart</button>
         <button *ngIf="!isUserLoggedIn()" routerLink="/login">Please Signin to add to cart!</button>
     </div>
 </div>
 
-
+<div>
+    <h1 class="otheritemstext">Check out our other purrfect items: </h1>
+</div>
 
 <div class="other-items-container">
     <div *ngFor="let otherItem of items" class="other-item">
@@ -19,7 +21,7 @@
             <mat-card-content [routerLink]="'/items/' + otherItem?.itemName">
                 <img class="otheritem-image" [src]="otherItem.image" alt="{{ otherItem.itemName }} Image">
                 <h4>{{ otherItem.itemName }}</h4>
-                <h1>${{ otherItem.price }}</h1>
+                <h4>${{ otherItem.price }}</h4>
             </mat-card-content>
         </mat-card>
     </div>

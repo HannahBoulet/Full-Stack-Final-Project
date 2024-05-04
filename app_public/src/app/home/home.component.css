@@ -136,3 +136,8 @@ button:hover {
 .dropdown:hover .dropbtn {
     background-color: #656565;
 }
+
+.unique-items-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
