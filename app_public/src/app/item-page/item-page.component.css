@@ -19,23 +19,27 @@
 
 
 .container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
     display: flex;
+    height: 600px;
+    width: 100%;
     background-color: gray;
 }
 
 .item-image {
-    width: 100%;
-    max-width: 500px;
-    max-height: 500px;
-    min-width: 500px;
-    min-height: 500px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+    flex: 1;
+    max-width: 100%;
+    object-fit: cover;
+
 }
+
+/* .inner-container {
+    width: 100%;
+    height: 100%;
+} */
 
 
 .otheritem-image {
@@ -84,12 +88,16 @@ p {
 }
 
 .left-column {
-    width: 65%;
+    flex: .65;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
 }
 
 .right-column {
-    width: 35%;
+    flex: .35;
     margin-top: 60px;
 
 }

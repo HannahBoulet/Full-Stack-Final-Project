@@ -1,21 +1,16 @@
-.sort-container {
-    margin-left: 20px;
-    flex-shrink: 0;
-}
-
-.sort-container label {
-    margin-right: 10px;
-}
-
-.horizontal-scroll {
-    overflow-x: auto;
-    white-space: nowrap;
+.item-container {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    min-height: 800px;
+    background-color: #f2f2f2;
 }
 
 
-.cart-item-container {
+.item-card {
     border: 1px solid #343434;
     padding: 5px;
     margin: 10px;
@@ -26,8 +21,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 0 0 auto;
-    margin-right: 10px;
 }
 
 .item-image {
