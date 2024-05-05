@@ -20,12 +20,11 @@ export class CartPageComponent {
   constructor(private shopService: ShopService, private router: Router) { }
 
   ngOnInit(): void {
-    this.shopService.getUserCart(); // Fetch user's cart items
+    this.shopService.getUserCart();
     this.cartSubscription = this.shopService.getCartListener().subscribe((cartItems: string[]) => {
       this.cartItems = cartItems;
       this.calculateTotalPrice();
     });
-    // Fetch items
     this.shopService.getItems();
     this.shopService.getItemListener().subscribe((items: Items[]) => {
       this.items = items;
@@ -49,7 +48,7 @@ export class CartPageComponent {
   calculateTotalPrice(): void {
     this.totalPrice = this.cartItems.reduce((total, itemId) => {
       const item = this.getItemById(itemId);
-      return total + (item ? item.price : 0); // Accumulate the price of each item
+      return total + (item ? item.price : 0);
     }, 0);
   }
   goToCheckout(): void {

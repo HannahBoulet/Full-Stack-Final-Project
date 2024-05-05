@@ -67,6 +67,7 @@ export default class AuthenticationController {
                     .json({ message: "error retrieving user", error })
             })
     }
+
     getUserCart(req: Request, res: Response, next: NextFunction) {
         const { userName } = req.params;
         User.findOne({ userName })

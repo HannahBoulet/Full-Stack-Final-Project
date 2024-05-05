@@ -14,8 +14,8 @@ export interface IUser extends Document {
     setPassword: (pasword: string) => void,
     validPassword: (pasword: string) => boolean,
     generateJwt: () => Jwt,
-    shoppingCart: String[],
-    oldOrderCart: String[],
+    shoppingCart: string[],
+    oldOrderCart: string[],
 
 }
 

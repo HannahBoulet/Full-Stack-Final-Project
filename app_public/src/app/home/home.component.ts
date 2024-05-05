@@ -10,15 +10,9 @@ import AuthService from '../auth/auth.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  //home needs:
-  /* 
-  display all items, but only their price and name and img.
-  see if user is logged in with current user, if not prompt them w a log in or register (may implement if time)
-  */
-
-  items: Items[] = [];
+  private items: Items[] = [];
   sortedItems: Items[] = [];
-  sortDirection: string = 'asc';
+  sortDirection: string = 'price';
   constructor(private shopService: ShopService, private router: Router, private authService: AuthService) { }
   ngOnInit() {
     this.shopService.getItemListener().subscribe((items: Items[]) => {
@@ -29,7 +23,7 @@ export class HomeComponent {
   }
   sortItems() {
     this.sortedItems = this.items.slice().sort((a, b) => {
-      if (this.sortDirection === 'asc') {
+      if (this.sortDirection === 'pricelow') {
         return a.price - b.price;
       } else {
         return b.price - a.price;

@@ -35,29 +35,34 @@ export class ConfirmationPageComponent {
     const randomShippingDays = Math.floor(Math.random() * (1000 - 5 + 1)) + 5;
     this.shippingDate = new Date(currentDate.setDate(currentDate.getDate() + randomShippingDays));
   }
-
   confirmOrder(): void {
-    this.shopService.clearCart().subscribe(() => {
-      const cartItems = this.shopService.getCart();
-      cartItems.forEach(itemId => {
-        this.shopService.confirmOrder(itemId).subscribe(() => {
-          console.log('Item added to past orders successfully');
-        }, error => {
-          console.error('Failed to add item to past orders:', error);
+    this.shopService.clearCart().subscribe({
+      next: () => {
+        const cartItems = this.shopService.getCart();
+        cartItems.forEach(itemId => {
+          this.shopService.confirmOrder(itemId).subscribe({
+            next: () => {
+              console.log('Item added to past orders successfully');
+            },
+            error: (error) => {
+              console.error('Failed to add item to past orders:', error);
+            }
+          });
         });
-      });
-      localStorage.removeItem('creditCardNumber');
-      localStorage.removeItem('expiryDate');
-      localStorage.removeItem('cvv');
-      localStorage.removeItem('address');
-      localStorage.removeItem('city');
-      localStorage.removeItem('state');
-      localStorage.removeItem('country');
-      localStorage.removeItem('zipCode');
+        localStorage.removeItem('creditCardNumber');
+        localStorage.removeItem('expiryDate');
+        localStorage.removeItem('cvv');
+        localStorage.removeItem('address');
+        localStorage.removeItem('city');
+        localStorage.removeItem('state');
+        localStorage.removeItem('country');
+        localStorage.removeItem('zipCode');
 
-      this.router.navigate(['//']);
-    }, error => {
-      console.error('Failed to clear cart:', error);
+        this.router.navigate(['//']);
+      },
+      error: (error) => {
+        console.error('Failed to clear cart:', error);
+      }
     });
   }
 }

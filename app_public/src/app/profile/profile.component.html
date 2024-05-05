@@ -8,10 +8,10 @@
             <div *ngFor="let itemId of oldItems" class="item-card">
                 <div *ngIf="getItemById(itemId) as item">
                     <mat-card>
-                        <mat-card-content>
+                        <mat-card-content [routerLink]="'//items/' + item.itemName">
                             <img class="item-image" [src]="item.image" alt="{{ item.itemName }} Image">
-                            <h1>{{ item.itemName }}</h1>
-                            <h1>${{ item.price }}</h1>
+                            <h4>{{ item.itemName }}</h4>
+                            <h4>${{ item.price }}</h4>
                         </mat-card-content>
                         <button (click)="reorderItem(itemId)">Reorder</button>
                     </mat-card>
@@ -20,7 +20,6 @@
         </div>
     </div>
 </div>
-
 <ng-template #emptyCart>
     <div class="empty-cart">
         <p>You have never ordered any items! Order items to see past ordered items!</p>

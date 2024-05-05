@@ -33,11 +33,9 @@ export class ItemPageComponent implements OnInit {
       this.items = items;
     });
 
-    // Fetch initial item and items
     this.shopService.getItem(this.route.snapshot.params["itemName"]);
     this.shopService.getItems();
   }
-  //if user not signed in dont show add to cart button but show please sign in to purchase items!
   addToCart(itemId: string): void {
     this.shopService.addToCart(itemId);
   }

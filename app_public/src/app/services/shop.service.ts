@@ -11,21 +11,21 @@ import AuthService from '../auth/auth.service';
 export class ShopService {
   API_URL = "http://localhost:3000/api/";
 
-  //item stuff
+  //item objects
   private items: Items[] = [];
   private itemListener: Subject<Items[]> = new Subject();
   private currentItem: Items | undefined;
   private currentItemListener: Subject<Items | undefined> = new Subject();
-  //cart stuff
-  private cart: string[] = []; // Assuming cart holds item IDs
+
+  //cart objects
+  private cart: string[] = [];
   private cartListener: Subject<string[]> = new Subject();
-  private oldCart: string[] = []; // Assuming cart holds item IDs
+  private oldCart: string[] = [];
   private oldCartListener: Subject<string[]> = new Subject();
 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
-  //calls to api
-  //item calls
+
   getItems(): void {
     this.http.get<IItems[]>(this.API_URL + "items").subscribe((iitems: IItems[]) => {
       this.items = [];
@@ -103,19 +103,15 @@ export class ShopService {
     });
   }
 
-  // Get cart
   getCart(): string[] {
     return this.cart;
   }
 
-  // Get cart listener
   getCartListener(): Observable<string[]> {
     return this.cartListener.asObservable();
   }
 
-  getUser(): Observable<User | null> {
-    return this.http.get<User>(this.API_URL + 'user');
-  }
+
 
 
   getUserCart(): void {
@@ -159,8 +155,6 @@ export class ShopService {
     return this.http.delete<any>(this.API_URL + `clearcart/${currentUser!.userName}`);
   }
 
-
-  //past order methods:
   confirmOrder(itemId: string): Observable<any> {
     const currentUser = this.authService.getUser();
     return this.http.put<any>(this.API_URL + `user/${currentUser!.userName}/confirmOrder/${itemId}`, {});
@@ -190,5 +184,6 @@ export class ShopService {
   getOldCart(): string[] {
     return this.oldCart;
   }
+
 
 }

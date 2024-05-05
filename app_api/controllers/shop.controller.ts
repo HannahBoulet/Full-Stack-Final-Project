@@ -4,7 +4,6 @@ import Item from '../models/items.models';
 
 
 export default class ShopCtrl {
-    //item logic
     getAllItems = (req: Request, res: Response, next: NextFunction): void => {
         Item.find()
             .then((items) => {
@@ -14,6 +13,7 @@ export default class ShopCtrl {
                 res.status(400).json(error);
             });
     };
+
     getItem = (req: Request, res: Response, next: NextFunction): void => {
         Item.findOne({ itemName: req.params["itemName"] })
             .then((item) => {
@@ -97,8 +97,6 @@ export default class ShopCtrl {
                 })
             })
     };
-    //cart logic
-    // Inside the addItemToCart method:
 
     addItemToCart = (req: Request, res: Response, next: NextFunction): void => {
         const itemId = req.params["itemId"];
@@ -130,7 +128,7 @@ export default class ShopCtrl {
                 });
             });
     };
-    //clears all items from cart
+
     clearCart = (req: Request, res: Response, next: NextFunction): void => {
         const userName = req.params["userName"];
 
