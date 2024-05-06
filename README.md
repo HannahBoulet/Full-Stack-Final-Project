@@ -37,21 +37,24 @@ To run the Cat Meme E-Commerce Store locally, follow these steps:
 3. **Set Up Environment Variables**: 
    Create a `.env` file in the root directory and add the following variables:
    ```
-   PORT=3000
-   MONGODB_URI=mongodb://localhost/cat_meme_store
    SECRET_KEY=your_secret_key
    ```
-4. **Build the application**: 
+4. **Add yourself to the mongoDB**: 
+   Go to the models then db.ts and add your mongose database connection to the connectstring
+   ```
+   cd app_public
+   ```
+5. **Build the application**: 
    ```bash
    cd app_public
    ng build
    ```
-5. **Run the Application**: 
+6. **Run the Application**: 
    ```bash
    npm start
    ```
 
-5. **Access the Application**: 
+7. **Access the Application**: 
    Open your browser and navigate to `http://localhost:3000` to access the Cat Meme E-Commerce Store.
 
 ## Contributing

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const connectString = "mongodb+srv://flubbygubby:stuffpaste2015@atlascluster.buif2df.mongodb.net/?retryWrites=true&w=majority"
+const connectString = "connectstringgoeshere"
 
 mongoose.connect(connectString);
 
