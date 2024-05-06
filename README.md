@@ -40,21 +40,19 @@ To run the Cat Meme E-Commerce Store locally, follow these steps:
    SECRET_KEY=your_secret_key
    ```
 4. **Add yourself to the mongoDB**: 
-   Go to the models then db.ts and add your mongose database connection to the connectstring
-   ```
-   cd app_public
-   ```
-5. **Build the application**: 
+   Go to the models in the app_public folder then db.ts and add your Mongoose database connection to the connectstring
+   
+6. **Build the application**: 
    ```bash
    cd app_public
    ng build
    ```
-6. **Run the Application**: 
+7. **Run the Application**: 
    ```bash
    npm start
    ```
 
-7. **Access the Application**: 
+8. **Access the Application**: 
    Open your browser and navigate to `http://localhost:3000` to access the Cat Meme E-Commerce Store.
 
 ## Contributing
